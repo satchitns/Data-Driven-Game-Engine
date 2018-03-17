@@ -1,0 +1,34 @@
+{
+	"Healths":
+	{
+		"type" : "integer",
+		"data" : [4, 5]
+	},
+	"Name":
+	{
+		"type" : "string",
+		"data" : "Bob"
+	},
+	"Turret":
+	{
+		"type" : "table",
+		"data" :
+		{
+			"Health":
+			{
+				"type":"float",
+				"data":"1.0"
+			}
+		}
+	},
+	"Forward":
+	{
+		"type" : "vector",
+		"data" : "vec4(2.0, 3.0, 4.0, 5.0)"
+	},
+	 "Transform":
+	{
+		"type" : "matrix",
+		"data" : "mat4x4((2.0, 3.0, 4.0, 5.0), (2.0, 3.0, 4.0, 5.0), (2.0, 3.0, 4.0, 5.0), (2.0, 3.0, 4.0, 5.0))"
+	}
+}

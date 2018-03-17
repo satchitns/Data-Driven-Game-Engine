@@ -1,0 +1,46 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <ClCompile Include="$(MSBuildThisFileDirectory)Attributed.cpp" />
+    <ClCompile Include="$(MSBuildThisFileDirectory)Datum.cpp" />
+    <ClCompile Include="$(MSBuildThisFileDirectory)DefaultIncrement.cpp" />
+    <ClCompile Include="$(MSBuildThisFileDirectory)HashMapCompare.cpp" />
+    <ClCompile Include="$(MSBuildThisFileDirectory)Scope.cpp" />
+    <ClCompile Include="$(MSBuildThisFileDirectory)jsoncpp.cpp">
+      <Filter>JsonCPP</Filter>
+    </ClCompile>
+    <ClCompile Include="$(MSBuildThisFileDirectory)JsonParseMaster.cpp" />
+    <ClCompile Include="$(MSBuildThisFileDirectory)JsonParseHelperTable.cpp" />
+    <ClCompile Include="$(MSBuildThisFileDirectory)TableSharedData.cpp" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="$(MSBuildThisFileDirectory)Attributed.h" />
+    <ClInclude Include="$(MSBuildThisFileDirectory)Datum.h" />
+    <ClInclude Include="$(MSBuildThisFileDirectory)DefaultIncrement.h" />
+    <ClInclude Include="$(MSBuildThisFileDirectory)HashMap.h" />
+    <ClInclude Include="$(MSBuildThisFileDirectory)RTTI.h" />
+    <ClInclude Include="$(MSBuildThisFileDirectory)Scope.h" />
+    <ClInclude Include="$(MSBuildThisFileDirectory)SList.h" />
+    <ClInclude Include="$(MSBuildThisFileDirectory)Vector.h" />
+    <ClInclude Include="$(MSBuildThisFileDirectory)json\json.h">
+      <Filter>JsonCPP</Filter>
+    </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)json\json-forwards.h">
+      <Filter>JsonCPP</Filter>
+    </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)IJsonParseHelper.h" />
+    <ClInclude Include="$(MSBuildThisFileDirectory)JsonParseMaster.h" />
+    <ClInclude Include="$(MSBuildThisFileDirectory)JsonParseHelperTable.h" />
+    <ClInclude Include="$(MSBuildThisFileDirectory)TableSharedData.h" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="$(MSBuildThisFileDirectory)HashMap.inl" />
+    <None Include="$(MSBuildThisFileDirectory)SList.inl" />
+    <None Include="$(MSBuildThisFileDirectory)Vector.inl" />
+  </ItemGroup>
+  <ItemGroup>
+    <Filter Include="JsonCPP">
+      <UniqueIdentifier>{73952730-ac04-4467-a720-fe7bb98ca526}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+</Project>
