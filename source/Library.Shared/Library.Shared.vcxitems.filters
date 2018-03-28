@@ -12,6 +12,12 @@
     <ClCompile Include="$(MSBuildThisFileDirectory)JsonParseMaster.cpp" />
     <ClCompile Include="$(MSBuildThisFileDirectory)JsonParseHelperTable.cpp" />
     <ClCompile Include="$(MSBuildThisFileDirectory)TableSharedData.cpp" />
+    <ClCompile Include="$(MSBuildThisFileDirectory)GameClock.cpp" />
+    <ClCompile Include="$(MSBuildThisFileDirectory)GameTime.cpp" />
+    <ClCompile Include="$(MSBuildThisFileDirectory)WorldState.cpp" />
+    <ClCompile Include="$(MSBuildThisFileDirectory)Entity.cpp" />
+    <ClCompile Include="$(MSBuildThisFileDirectory)Sector.cpp" />
+    <ClCompile Include="$(MSBuildThisFileDirectory)World.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="$(MSBuildThisFileDirectory)Attributed.h" />
@@ -32,11 +38,19 @@
     <ClInclude Include="$(MSBuildThisFileDirectory)JsonParseMaster.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)JsonParseHelperTable.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)TableSharedData.h" />
+    <ClInclude Include="$(MSBuildThisFileDirectory)Factory.h" />
+    <ClInclude Include="$(MSBuildThisFileDirectory)GameClock.h" />
+    <ClInclude Include="$(MSBuildThisFileDirectory)GameTime.h" />
+    <ClInclude Include="$(MSBuildThisFileDirectory)WorldState.h" />
+    <ClInclude Include="$(MSBuildThisFileDirectory)Entity.h" />
+    <ClInclude Include="$(MSBuildThisFileDirectory)Sector.h" />
+    <ClInclude Include="$(MSBuildThisFileDirectory)World.h" />
   </ItemGroup>
   <ItemGroup>
     <None Include="$(MSBuildThisFileDirectory)HashMap.inl" />
     <None Include="$(MSBuildThisFileDirectory)SList.inl" />
     <None Include="$(MSBuildThisFileDirectory)Vector.inl" />
+    <None Include="$(MSBuildThisFileDirectory)Factory.inl" />
   </ItemGroup>
   <ItemGroup>
     <Filter Include="JsonCPP">

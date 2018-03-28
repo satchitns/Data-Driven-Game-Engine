@@ -1,6 +1,9 @@
 #include "pch.h"
 #include "JsonParseHelperTable.h"
 #include "TableSharedData.h"
+#include "Sector.h"
+#include "Entity.h"
+#include "World.h"
 
 namespace FieaGameEngine
 {
@@ -19,12 +22,33 @@ namespace FieaGameEngine
 		TableSharedData* tableData = data.As<TableSharedData>();
 		if (tableData != nullptr)
 		{
-			if (name.compare("type") && name.compare("data"))
+			if (name.compare("type") && name.compare("data") && name.compare("class") && name.compare("className"))
 			{
 				Scope *scope = tableData->GetScope();
 				if (element["data"].isObject())
 				{
-					Scope* childScope = &(scope->AppendScope(name));
+					Json::Value classValue = element["class"];
+					Scope* childScope = nullptr;
+					if (classValue.isNull())
+					{
+						childScope = &(scope->AppendScope(name));
+					}
+					else
+					{
+						std::string className = classValue.asString();
+						if (!className.compare("entity"))
+						{
+							assert(scope->Is(Sector::TypeName()));
+							Sector* sector = static_cast<Sector*>(scope);
+							childScope = sector->CreateEntity(element["className"].asString(), name);
+						}
+						else if (!className.compare("sector"))
+						{
+							assert(scope->Is(World::TypeName()));
+							World* sector = static_cast<World*>(scope);
+							childScope = sector->CreateSector(name);
+						}
+					}
 					tableData->SetScope(*childScope);
 				}
 				else
@@ -65,7 +89,7 @@ namespace FieaGameEngine
 			{
 				tableData->SetScope(*(tableData->GetScope()->GetParent()));
 			}
-			else if (name.compare("type") && name.compare("data"))
+			else if (name.compare("type") && name.compare("data") && name.compare("class") && name.compare("className"))
 			{
 				Scope& scope = *(tableData->GetScope());
 				Attribute& attribute = mAttributeStack.top();
@@ -81,7 +105,10 @@ namespace FieaGameEngine
 					if (jsonData.isArray())
 					{
 						uint32_t size = jsonData.size();
-						scope[name].Resize(size);
+						if (!scope[name].IsExternal())
+						{
+							scope[name].Resize(size);
+						}
 						for (uint32_t i = 0; i < size; ++i)
 						{
 							scope[name].SetFromString(jsonData[i].asString(), i);
@@ -89,7 +116,10 @@ namespace FieaGameEngine
 					}
 					else
 					{
-						scope[name].Resize(1);
+						if (!scope[name].IsExternal())
+						{
+							scope[name].Resize(1);
+						}
 						scope[name].SetFromString(jsonData.asString());
 					}
 				}

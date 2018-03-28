@@ -59,7 +59,7 @@ namespace FieaGameEngine
 			static std::string TypeName() { return std::string(#Type); }                                     \
 			static std::uint64_t TypeIdClass() { return sRunTimeTypeId; }                                    \
 			virtual std::uint64_t TypeIdInstance() const override { return Type::TypeIdClass(); }            \
-			virtual FieaGameEngine::RTTI* QueryInterface(const std::uint64_t id) const override                     \
+			virtual FieaGameEngine::RTTI* QueryInterface(const std::uint64_t id) const override              \
             {                                                                                                \
                 if (id == sRunTimeTypeId)                                                                    \
 					{ return (RTTI*)this; }                                                                  \

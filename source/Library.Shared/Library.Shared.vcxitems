@@ -17,6 +17,10 @@
     <ClInclude Include="$(MSBuildThisFileDirectory)Attributed.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)Datum.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)DefaultIncrement.h" />
+    <ClInclude Include="$(MSBuildThisFileDirectory)Entity.h" />
+    <ClInclude Include="$(MSBuildThisFileDirectory)Factory.h" />
+    <ClInclude Include="$(MSBuildThisFileDirectory)GameClock.h" />
+    <ClInclude Include="$(MSBuildThisFileDirectory)GameTime.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)HashMap.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)IJsonParseHelper.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)JsonParseHelperTable.h" />
@@ -25,11 +29,15 @@
     <ClInclude Include="$(MSBuildThisFileDirectory)json\json.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)RTTI.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)Scope.h" />
+    <ClInclude Include="$(MSBuildThisFileDirectory)Sector.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)SList.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)TableSharedData.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)Vector.h" />
+    <ClInclude Include="$(MSBuildThisFileDirectory)World.h" />
+    <ClInclude Include="$(MSBuildThisFileDirectory)WorldState.h" />
   </ItemGroup>
   <ItemGroup>
+    <None Include="$(MSBuildThisFileDirectory)Factory.inl" />
     <None Include="$(MSBuildThisFileDirectory)HashMap.inl" />
     <None Include="$(MSBuildThisFileDirectory)SList.inl" />
     <None Include="$(MSBuildThisFileDirectory)Vector.inl" />
@@ -40,6 +48,9 @@
     <ClCompile Include="$(MSBuildThisFileDirectory)DefaultIncrement.cpp">
       <PrecompiledHeader>NotUsing</PrecompiledHeader>
     </ClCompile>
+    <ClCompile Include="$(MSBuildThisFileDirectory)Entity.cpp" />
+    <ClCompile Include="$(MSBuildThisFileDirectory)GameClock.cpp" />
+    <ClCompile Include="$(MSBuildThisFileDirectory)GameTime.cpp" />
     <ClCompile Include="$(MSBuildThisFileDirectory)HashMapCompare.cpp" />
     <ClCompile Include="$(MSBuildThisFileDirectory)jsoncpp.cpp">
       <DisableSpecificWarnings>4702</DisableSpecificWarnings>
@@ -47,6 +58,9 @@
     <ClCompile Include="$(MSBuildThisFileDirectory)JsonParseHelperTable.cpp" />
     <ClCompile Include="$(MSBuildThisFileDirectory)JsonParseMaster.cpp" />
     <ClCompile Include="$(MSBuildThisFileDirectory)Scope.cpp" />
+    <ClCompile Include="$(MSBuildThisFileDirectory)Sector.cpp" />
     <ClCompile Include="$(MSBuildThisFileDirectory)TableSharedData.cpp" />
+    <ClCompile Include="$(MSBuildThisFileDirectory)World.cpp" />
+    <ClCompile Include="$(MSBuildThisFileDirectory)WorldState.cpp" />
   </ItemGroup>
 </Project>

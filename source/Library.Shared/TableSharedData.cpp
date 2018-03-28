@@ -5,7 +5,7 @@ namespace FieaGameEngine
 {
 	RTTI_DEFINITIONS(TableSharedData)
 
-	TableSharedData::TableSharedData(Scope &scope)
+		TableSharedData::TableSharedData(Scope &scope)
 		:mScope(&scope)
 	{
 

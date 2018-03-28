@@ -171,6 +171,15 @@ namespace FieaGameEngine
 		}
 	}
 
+	Datum& Attributed::CreateNestedScope(const string& name)
+	{
+		HandlePrescribedAttribute(name);
+		Datum &scopeDatum = Append(name);
+		scopeDatum.SetType(Datum::DatumType::TABLE);
+		return scopeDatum;
+	}
+
+
 	void Attributed::AddNestedScope(const string& name)
 	{
 		HandlePrescribedAttribute(name);

@@ -249,6 +249,7 @@ xcopy /Y /E "$(ProjectDir)Content" "$(OutDir)Content"</Command>
     <ClInclude Include="Foo.h" />
     <ClInclude Include="FooJsonParseHelper.h" />
     <ClInclude Include="FooSharedData.h" />
+    <ClInclude Include="Monster.h" />
     <ClInclude Include="stdafx.h" />
     <ClInclude Include="targetver.h" />
     <ClInclude Include="TestRTTI.h" />
@@ -257,10 +258,12 @@ xcopy /Y /E "$(ProjectDir)Content" "$(OutDir)Content"</Command>
     <ClCompile Include="AttributedFoo.cpp" />
     <ClCompile Include="AttributedTest.cpp" />
     <ClCompile Include="DatumTest.cpp" />
+    <ClCompile Include="FactoryTest.cpp" />
     <ClCompile Include="Foo.cpp" />
     <ClCompile Include="FooJsonParseHelper.cpp" />
     <ClCompile Include="FooSharedData.cpp" />
     <ClCompile Include="MapTest.cpp" />
+    <ClCompile Include="Monster.cpp" />
     <ClCompile Include="ScopeTest.cpp" />
     <ClCompile Include="stdafx.cpp">
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Create</PrecompiledHeader>
@@ -272,6 +275,7 @@ xcopy /Y /E "$(ProjectDir)Content" "$(OutDir)Content"</Command>
     <ClCompile Include="TestRTTI.cpp" />
     <ClCompile Include="VectorTest.cpp" />
     <ClCompile Include="JsonParseTests.cpp" />
+    <ClCompile Include="WorldParseTest.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Library.Desktop\Library.Desktop.vcxproj">
@@ -279,6 +283,8 @@ xcopy /Y /E "$(ProjectDir)Content" "$(OutDir)Content"</Command>
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
+    <None Include="Content\level.json" />
+    <None Include="Content\scope.json" />
     <None Include="packages.config" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />

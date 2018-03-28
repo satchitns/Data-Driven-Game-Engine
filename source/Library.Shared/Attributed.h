@@ -161,6 +161,12 @@ namespace FieaGameEngine
 		void AddNestedScope(const std::string& name);
 
 		/**
+		*@brief Method to create a scope within this scope
+		*@param name - name of the scope's datum
+		**/
+		Datum& CreateNestedScope(const std::string& name);
+
+		/**
 		*@brief Method to add an external prescribed attribute (usually mapped to the class's data member)
 		*@param name - name of the attribute
 		*@param address - address of external storage (data member)

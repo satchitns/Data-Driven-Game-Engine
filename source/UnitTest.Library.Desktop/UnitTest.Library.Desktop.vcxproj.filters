@@ -42,6 +42,9 @@
     <ClInclude Include="FooSharedData.h">
       <Filter>Support Classes</Filter>
     </ClInclude>
+    <ClInclude Include="Monster.h">
+      <Filter>Support Classes</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="stdafx.cpp">
@@ -83,8 +86,23 @@
     <ClCompile Include="FooSharedData.cpp">
       <Filter>Support Classes</Filter>
     </ClCompile>
+    <ClCompile Include="FactoryTest.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Monster.cpp">
+      <Filter>Support Classes</Filter>
+    </ClCompile>
+    <ClCompile Include="WorldParseTest.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
+    <None Include="Content\level.json">
+      <Filter>Support Classes</Filter>
+    </None>
+    <None Include="Content\scope.json">
+      <Filter>Support Classes</Filter>
+    </None>
   </ItemGroup>
 </Project>
