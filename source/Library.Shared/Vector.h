@@ -93,6 +93,12 @@ namespace FieaGameEngine
 		explicit Vector(uint32_t capacity = 3);
 
 		/**
+		*@brief constructor for Vector
+		*@param list - list to initialize with
+		**/
+		Vector(const std::initializer_list<T>& list);
+
+		/**
 		*@brief index operator
 		*@param index - index of element to access
 		*@return reference to element at index
@@ -172,6 +178,14 @@ namespace FieaGameEngine
 		*@return iterator pointing to the inserted node
 		**/
 		Iterator PushBack(const T& value);
+
+		/**
+		*@brief insert a new element at the middle of the vector, relocating in memory if necessary
+		*@param value - element to be inserted
+		*@param index - index to be inserted at
+		*@return iterator pointing to the inserted node
+		**/
+		Iterator Insert(const T& value, uint32_t index);
 
 		/**
 		*@brief copy constructor for vector
@@ -257,6 +271,13 @@ namespace FieaGameEngine
 		*@return true if element was found and removed
 		**/
 		bool Remove(Iterator position);
+
+		/**
+		*@brief removes the element at the index
+		*@param position - index of element to be removed
+		*@return true if element was found and removed
+		**/
+		bool RemoveAt(uint32_t position);
 
 		/**
 		*@brief removes the elements in the given range

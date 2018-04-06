@@ -14,6 +14,11 @@
 #include "Factory.h"
 #include "Monster.h"
 #include "WorldState.h"
+#include "DebugAction.h"
+#include "ActionList.h"
+#include "ActionListIf.h"
+#include "ActionCreateAction.h"
+#include "ActionDestroyAction.h"
 
 using namespace Microsoft::VisualStudio::CppUnitTestFramework;
 using namespace FieaGameEngine;
@@ -32,6 +37,11 @@ namespace FieaGameEngine
 namespace UnitTestLibraryDesktop
 {
 	ConcreteFactory(Monster, Entity)
+	ConcreteFactory(DebugAction, Action)
+	ConcreteFactory(ActionList, Action)
+	ConcreteFactory(ActionCreateAction, Action)
+	ConcreteFactory(ActionDestroyAction, Action)
+	ConcreteFactory(ActionListIf, Action)
 
 	TEST_CLASS(WorldParseTest)
 	{
@@ -99,8 +109,8 @@ namespace UnitTestLibraryDesktop
 			master.AddHelper(helper);
 			string path = "Content/level.json";
 			master.ParseFromFile(path);
+			world->Update();
 			WorldState state;
-			world->Update(state);
 			GameTime *gameTime = state.GetGameTime();
 			gameTime;
 			delete world;
@@ -113,38 +123,32 @@ namespace UnitTestLibraryDesktop
 			Assert::ExpectException<exception>(exprn);
 		}
 
-		TEST_METHOD(EntityCopyMove)
+		TEST_METHOD(EntityMove)
 		{
 			Monster m1;
 			m1.SetName("Bob");
 			m1.Find("Health")->Set(45);
-			Monster m2;
-			m2 = m1;
-			Monster m3(m1);
 			Monster m4;
-			m4 = std::move(m2);
+			m4 = std::move(m1);
 			Monster m5(std::move(m4));
 			Assert::AreEqual(m5.Find("Health")->Get<int>(), 45);
 		}
 
-		TEST_METHOD(SectorCopyMove)
+		TEST_METHOD(SectorMove)
 		{
 			MonsterFactory mF;
 			Sector s1;
 			s1.SetName("Sector1");
 			s1.CreateEntity("Monster", "NewMonster");
-			Sector s2;
-			s2 = s1;
-			Scope* s = s2.Entities().Get<Scope*>();
-			Sector s3(s1);
+			Scope* s = s1.Entities().Get<Scope*>();
 			Sector s4;
-			s4 = std::move(s2);
+			s4 = std::move(s1);
 			Sector s5(std::move(s4));
 			Assert::IsTrue(s5.Name() ==  "Sector1"s);
 			Assert::IsTrue(s5.Entities().Get<Scope*>() == s);
 		}
 
-		TEST_METHOD(WorldCopyMove)
+		TEST_METHOD(WorldMove)
 		{
 			GameTime t;
 			GameClock c;
@@ -152,11 +156,9 @@ namespace UnitTestLibraryDesktop
 			s1.SetName("World1");
 			s1.CreateSector("FirstSector");
 			World s2(t, c);
-			s2 = s1;
-			Scope * s = s2.Sectors().Get<Scope*>();
-			World s3(s1);
+			Scope * s = s1.Sectors().Get<Scope*>();
 			World s4(t, c);
-			s4 = std::move(s2);
+			s4 = std::move(s1);
 			World s5(std::move(s4));
 			Assert::IsTrue(s5.Name() == "World1"s);
 			Assert::IsTrue(s5.Sectors().Get<Scope*>() == s);
@@ -170,6 +172,11 @@ namespace UnitTestLibraryDesktop
 		Sector dummySector;
 		Entity dummyEntity;
 		Monster dummyMonster;
+		DebugAction dummyDebugAction;
+		ActionList dummyList;
+		ActionListIf dummyIfAction;
+		ActionCreateAction dummyActionCreate;
+		ActionDestroyAction dummyActionDestroy;
 	};
 	_CrtMemState WorldParseTest::sStartMemState;
 }

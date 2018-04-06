@@ -9,6 +9,7 @@
 
 #include <stdio.h>
 #include <tchar.h>
+#define NOMINMAX
 #include <Windows.h>
 #include <iostream>
 #include <glad/glad.h>

@@ -20,30 +20,11 @@ namespace FieaGameEngine
 		mEntities = &CreateNestedScope(Sector::sEntities);
 	}
 
-	Sector::Sector(const Sector& other)
-		:Attributed(other), mName(other.mName)
-	{
-		UpdateExternalAttribute("Name", mName);
-		mEntities = Find(Sector::sEntities);
-	}
-
 	Sector::Sector(Sector&& other)
 		: Attributed(other), mName(std::move(other.mName))
 	{
 		UpdateExternalAttribute("Name", mName);
 		mEntities = other.mEntities;
-	}
-
-	Sector& Sector::operator=(const Sector& other)
-	{
-		if (this != &other)
-		{
-			Attributed::operator=(other);
-			mName = other.mName;
-			mEntities = Find(Sector::sEntities);
-			UpdateExternalAttribute("Name", mName);
-		}
-		return *this;
 	}
 
 	Sector& Sector::operator=(Sector&& other)
@@ -71,7 +52,7 @@ namespace FieaGameEngine
 	World * Sector::GetWorld() const
 	{
 		Scope* parentScope = GetParent();
-		assert(parentScope->Is(World::TypeName()));
+		assert(parentScope->Is(World::TypeIdClass()));
 		World* parent = static_cast<World*>(parentScope);
 		return parent;
 	}
@@ -87,7 +68,7 @@ namespace FieaGameEngine
 		for (uint32_t i = 0; i < mEntities->Size(); ++i)
 		{
 			Scope* scope = mEntities->Get<Scope*>(i);
-			assert(scope->Is(Entity::TypeName()));
+			assert(scope->Is(Entity::TypeIdClass()));
 			Entity *entity = static_cast<Entity*>(scope);
 			entity->Update(state);
 		}
@@ -108,6 +89,7 @@ namespace FieaGameEngine
 
 	Datum & Sector::Entities() const
 	{
+		assert(mEntities != nullptr);
 		return *mEntities;
 	}
 }

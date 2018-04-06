@@ -2,11 +2,11 @@
 #include "Attributed.h"
 #include "GameClock.h"
 #include "GameTime.h"
+#include "WorldState.h"
 
 namespace FieaGameEngine
 {
 	class Sector;
-	class WorldState;
 
 	/**
 	*@brief Class that represents a World of the game - equivalent to a level. Possesses a name.
@@ -17,9 +17,7 @@ namespace FieaGameEngine
 	public:
 		World(GameTime& time, GameClock& clock);
 		~World() = default;
-		World(const World& other);
 		World(World&& other);
-		World& operator=(const World& other);
 		World& operator=(World&& other);
 
 		/**
@@ -36,9 +34,8 @@ namespace FieaGameEngine
 
 		/**
 		*@brief Update function for the sector that runs every frame - updates all contained sectors
-		*@param World State object containing time and pointers for context
 		**/
-		void Update(WorldState& state);
+		void Update();
 
 
 		/**
@@ -54,9 +51,17 @@ namespace FieaGameEngine
 		**/
 		Datum& Sectors() const;
 
+		/**
+		*@brief Queues the given scope for deletion
+		*@param scope to delete
+		**/
+		void QueueForDelete(Scope& scope);
+
 		static const std::string sSectors;
 	private:
+		Vector<Scope*> mDeleteQueue;
 		std::string mName;
+		WorldState mState;
 		Datum* mSectors = nullptr;
 		GameClock *mClock = nullptr;
 		GameTime *mTime = nullptr;

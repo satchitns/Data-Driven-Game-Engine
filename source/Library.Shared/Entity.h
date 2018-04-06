@@ -16,9 +16,9 @@ namespace FieaGameEngine
 	public:
 		Entity();
 		virtual ~Entity() = default;
-		Entity(const Entity& other);
+		Entity(const Entity& other) = delete;
 		Entity(Entity&& other);
-		Entity& operator=(const Entity& other);
+		Entity& operator=(const Entity&) = delete;
 		Entity& operator=(Entity&& other);
 
 		/**
@@ -49,10 +49,27 @@ namespace FieaGameEngine
 		*@brief Update function for the entity that runs every frame
 		*@param World State object containing time and pointers for context
 		**/
-		void Update(WorldState& state);
+		virtual void Update(WorldState& state);
+
+		/**
+		*@brief Returns a reference to the actions datum
+		*@return reference to actions datum
+		**/
+		Datum& Actions() const;
+
+		/**
+		*@brief Helper function to create an action of type className and name instanceName within the entity
+		*@param className - type of Action to create
+		*@param instanceName - name of Action instance
+		*@return pointer to action
+		**/
+		class Action* CreateAction(const std::string & className, const std::string & instanceName);
+		
+		static const std::string sActions;
 	protected:
 		Entity(uint64_t);
 	private:
 		std::string mName;
+		Datum* mActions = nullptr;
 	};
 }

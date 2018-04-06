@@ -1,0 +1,71 @@
+{
+	"Name": {
+		"type": "string",
+		"data": "World1"
+	},
+	"Sector1": {
+		"type": "table",
+		"class": "sector",
+		"data": {
+			"Size": {
+				"type": "integer",
+				"data": 4000
+			},
+			"BlueMonster": {
+				"type": "table",
+				"class": "entity",
+				"className": "Monster",
+				"data": {
+					"Health": {
+						"type": "integer",
+						"data": 100
+					},
+					"ActionDebug": {
+						"type": "table",
+						"class": "action",
+						"className": "DebugAction",
+						"data": {
+							"DebugString": {
+								"type": "string",
+								"data": "hello"
+							}
+						}
+					},
+					"ConditionalAction": {
+						"type": "table",
+						"class": "action",
+						"className": "ActionListIf",
+						"data": {
+							"Condition": {
+								"type": "integer",
+								"data": 1
+							},
+							"If": {
+								"type": "table",
+								"class": "action",
+								"className": "DebugAction",
+								"data": {
+									"DebugString": {
+										"type": "string",
+										"data": "ifDebug"
+									}
+								}
+							},
+							"Else": {
+								"type": "table",
+								"class": "action",
+								"className": "DebugAction",
+								"data": {
+									"DebugString": {
+										"type": "string",
+										"data": "elseDebug"
+									}
+								}
+							}
+						}
+					}
+				}
+			}
+		}
+	}
+}

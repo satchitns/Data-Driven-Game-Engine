@@ -169,7 +169,6 @@ void RenderFrame(void)
 	devcon->ClearRenderTargetView(backbuffer, color);
 
 	// do 3D rendering on the back buffer here
-
 	// switch the back buffer and the front buffer
 	swapchain->Present(0, 0);
 }

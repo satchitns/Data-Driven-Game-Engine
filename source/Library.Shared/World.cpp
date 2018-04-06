@@ -18,34 +18,15 @@ namespace FieaGameEngine
 		mTime = &time;
 		mClock = &clock;
 		mSectors = &CreateNestedScope(World::sSectors);
-	}
-
-	World::World(const World& other)
-		:Attributed(other), mName(other.mName), mTime(other.mTime), mClock(other.mClock)
-	{
-		UpdateExternalAttribute("Name", mName);
-		mSectors = Find(World::sSectors);
+		mState.World = this;
+		mState.SetGameTime(*mTime);
 	}
 
 	World::World(World&& other)
-		: Attributed(other), mName(std::move(other.mName)), mTime(std::move(other.mTime)), mClock(std::move(other.mClock))
+		: Attributed(other), mName(std::move(other.mName)), mTime(std::move(other.mTime)), mClock(std::move(other.mClock)), mState(std::move(other.mState))
 	{
 		UpdateExternalAttribute("Name", mName);
 		mSectors = other.mSectors;
-	}
-
-	World& World::operator=(const World& other)
-	{
-		if (this != &other)
-		{
-			Attributed::operator=(other);
-			mName = other.mName;
-			mTime = other.mTime;
-			mClock = other.mClock;
-			mSectors = Find(World::sSectors);
-			UpdateExternalAttribute("Name", mName);
-		}
-		return *this;
 	}
 
 	World& World::operator=(World&& other)
@@ -67,6 +48,11 @@ namespace FieaGameEngine
 		return *mSectors;
 	}
 
+	void World::QueueForDelete(Scope & scope)
+	{
+		mDeleteQueue.PushBack(&scope);
+	}
+
 	const std::string & World::Name() const
 	{
 		return mName;
@@ -77,21 +63,27 @@ namespace FieaGameEngine
 		mName = name;
 	}
 
-	void World::Update(WorldState & state)
+	void World::Update()
 	{
-		state.World = this;
+		if (mDeleteQueue.Size() > 0)
+		{
+			for (auto &scope : mDeleteQueue)
+			{
+				delete scope;
+			}
+			mDeleteQueue.Clear();
+		}
+
 		assert(mTime != nullptr);
 		assert(mClock != nullptr);
 		mClock->UpdateGameTime(*mTime);
-		state.SetGameTime(*mTime);
 		for (uint32_t i = 0; i < mSectors->Size(); ++i)
 		{
 			Scope* scope = mSectors->Get<Scope*>(i);
-			assert(scope->Is(Sector::TypeName()));
+			assert(scope->Is(Sector::TypeIdClass()));
 			Sector *sector = static_cast<Sector*>(scope);
-			sector->Update(state);
+			sector->Update(mState);
 		}
-		state.World = nullptr;
 	}
 
 	Sector * World::CreateSector(const std::string & instanceName)

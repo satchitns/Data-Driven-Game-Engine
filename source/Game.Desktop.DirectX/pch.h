@@ -10,6 +10,7 @@
 #include<iostream>
 #include <stdio.h>
 #include <tchar.h>
+#define NOMINMAX
 #include <Windows.h>
 #include <d3d11.h>
 

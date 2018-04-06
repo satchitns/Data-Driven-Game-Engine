@@ -4,6 +4,8 @@
 #include "Sector.h"
 #include "Entity.h"
 #include "World.h"
+#include "ActionList.h"
+#include "ActionListIf.h"
 
 namespace FieaGameEngine
 {
@@ -38,15 +40,48 @@ namespace FieaGameEngine
 						std::string className = classValue.asString();
 						if (!className.compare("entity"))
 						{
-							assert(scope->Is(Sector::TypeName()));
+							assert(scope->Is(Sector::TypeIdClass()));
 							Sector* sector = static_cast<Sector*>(scope);
 							childScope = sector->CreateEntity(element["className"].asString(), name);
 						}
 						else if (!className.compare("sector"))
 						{
-							assert(scope->Is(World::TypeName()));
+							assert(scope->Is(World::TypeIdClass()));
 							World* sector = static_cast<World*>(scope);
 							childScope = sector->CreateSector(name);
+						}
+						else if (!className.compare("action"))
+						{
+							if (!name.compare("If"))
+							{
+								assert(scope->Is(ActionListIf::TypeIdClass()));
+								ActionListIf* actionIf = static_cast<ActionListIf*>(scope);
+								Action* action = actionIf->CreateAction(element["className"].asString(), name);
+								childScope = action;
+								actionIf->SetIfCase(*action);
+							}
+							else if (!name.compare("Else"))
+							{
+								assert(scope->Is(ActionListIf::TypeIdClass()));
+								ActionListIf* actionIf = static_cast<ActionListIf*>(scope);
+								Action* action = actionIf->CreateAction(element["className"].asString(), name);
+								childScope = action;
+								actionIf->SetElseCase(*action);
+							}
+							else
+							{
+								assert(scope->Is(ActionList::TypeIdClass()) || scope->Is(Entity::TypeIdClass()));
+								if (scope->Is(ActionList::TypeIdClass()))
+								{
+									ActionList* actionList = static_cast<ActionList*>(scope);
+									childScope = actionList->CreateAction(element["className"].asString(), name);
+								}
+								else if (scope->Is(Entity::TypeIdClass()))
+								{
+									Entity* entity = static_cast<Entity*>(scope);
+									childScope = entity->CreateAction(element["className"].asString(), name);
+								}
+							}
 						}
 					}
 					tableData->SetScope(*childScope);

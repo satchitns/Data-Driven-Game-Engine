@@ -83,6 +83,11 @@ namespace UnitTestLibraryDesktop
 				Assert::AreNotEqual(vector3.Front(), vector6.Front());
 				vector5 = vector5; //copying self
 			}
+			{
+				Vector<int> vector = {
+					1,2,3,4,5
+				};
+			}
 		}
 
 		TEST_METHOD(Vector_Clear_Shrink)
@@ -402,7 +407,7 @@ namespace UnitTestLibraryDesktop
 			a.PushBack(3);
 			Assert::AreEqual(2U, a.Size());
 		}
-		
+
 		TEST_METHOD(Vector_Resize)
 		{
 			Vector<int> x;
@@ -412,6 +417,55 @@ namespace UnitTestLibraryDesktop
 			x.PushBack(3);
 			x.PushBack(4);
 			x.Resize(2);
+		}
+
+		TEST_METHOD(Vector_Insert)
+		{
+			{
+				Vector<int> x;
+				x.PushBack(0);
+				x.PushBack(1);
+				x.Insert(2323, 1);
+				Assert::AreEqual(x.Back(), 1);
+				x.Remove(1);
+				Assert::AreEqual(x.Back(), 2323);
+			}
+			{
+				Vector<int> x;
+				x.PushBack(0);
+				x.PushBack(1);
+				x.PushBack(2);
+				x.PushBack(3);
+				x.PushBack(4);
+				x.PushBack(6);
+				x.PushBack(8);
+				x.Insert(-500, 2);
+				Assert::AreEqual(x.Size(), 8U);
+				x.Remove(0);
+				x.Remove(1);
+				Assert::AreEqual(x.Front(), -500);
+				x.Remove(-500);
+				Assert::AreEqual(x.Front(), 2);
+				Assert::AreEqual(x.Back(), 8);
+			}
+			{
+				Vector<int> x;
+				x.PushBack(0);
+				x.PushBack(1);
+				x.PushBack(2);
+				x.PushBack(3);
+				x.Insert(200, 3);
+				Assert::AreEqual(x.Back(), 3);
+			}
+			{
+				Vector<int> x;
+				x.PushBack(0);
+				x.PushBack(1);
+				x.PushBack(2);
+				x.PushBack(3);
+				x.Insert(200, 4);
+				Assert::AreEqual(x.Back(), 200);
+			}
 		}
 
 		TEST_METHOD(Vector_Remove)
@@ -481,6 +535,33 @@ namespace UnitTestLibraryDesktop
 				Assert::IsTrue(removed);
 				Assert::AreEqual(1U, a.Size());
 				Assert::AreEqual(n, a.Front());
+			}
+			{
+				//int
+				Vector<int> vector(3);
+				vector.PushBack(1);
+				vector.PushBack(2);
+				vector.PushBack(3);
+				vector.RemoveAt(2);
+				Assert::AreEqual(vector.Back(), 2);
+			}
+			{
+				//int
+				Vector<int> vector(3);
+				vector.PushBack(1);
+				vector.PushBack(2);
+				vector.PushBack(3);
+				vector.RemoveAt(1);
+				Assert::AreEqual(vector.Front(), 1);
+			}
+			{
+				//int
+				Vector<int> vector(3);
+				vector.PushBack(1);
+				vector.PushBack(2);
+				vector.PushBack(3);
+				vector.RemoveAt(0);
+				Assert::AreEqual(vector.Front(), 2);
 			}
 		}
 

@@ -1,0 +1,86 @@
+{
+	"Name": {
+		"type": "string",
+		"data": "World1"
+	},
+	"Sector1": {
+		"type": "table",
+		"class": "sector",
+		"data": {
+			"Size": {
+				"type": "integer",
+				"data": 4000
+			},
+			"BlueMonster": {
+				"type": "table",
+				"class": "entity",
+				"className": "Monster",
+				"data": {
+					"Health": {
+						"type": "integer",
+						"data": 100
+					},
+					"Multipliers": {
+						"type": "float",
+						"data": [ 10.0, 20.0, 30.0, 40.0, 50.0 ]
+					},
+					"ActionExpression": {
+						"type": "table",
+						"class": "action",
+						"className": "ActionExpression",
+						"data": {
+							"String": {
+								"type": "string",
+								"data": "BlueMonster.Health = Multipliers[3] * (5 + ( 15 % 6) )"
+							}
+						}
+					},
+					"ActionExpression2": {
+						"type": "table",
+						"class": "action",
+						"className": "ActionExpression",
+						"data": {
+							"String": {
+								"type": "string",
+								"data": "Multipliers[1] = 19 * 10"
+							}
+						}
+					},
+					"ConditionalAction": {
+						"type": "table",
+						"class": "action",
+						"className": "ActionListIf",
+						"data": {
+							"Condition": {
+								"type": "integer",
+								"data": 1
+							},
+							"If": {
+								"type": "table",
+								"class": "action",
+								"className": "DebugAction",
+								"data": {
+									"DebugString": {
+										"type": "string",
+										"data": "ifDebug"
+									}
+								}
+							},
+							"Else": {
+								"type": "table",
+								"class": "action",
+								"className": "DebugAction",
+								"data": {
+									"DebugString": {
+										"type": "string",
+										"data": "elseDebug"
+									}
+								}
+							}
+						}
+					}
+				}
+			}
+		}
+	}
+}

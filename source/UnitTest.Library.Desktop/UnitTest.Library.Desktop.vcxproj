@@ -246,6 +246,7 @@ xcopy /Y /E "$(ProjectDir)Content" "$(OutDir)Content"</Command>
   <ItemGroup>
     <ClInclude Include="AssertHelp.h" />
     <ClInclude Include="AttributedFoo.h" />
+    <ClInclude Include="DebugAction.h" />
     <ClInclude Include="Foo.h" />
     <ClInclude Include="FooJsonParseHelper.h" />
     <ClInclude Include="FooSharedData.h" />
@@ -255,9 +256,11 @@ xcopy /Y /E "$(ProjectDir)Content" "$(OutDir)Content"</Command>
     <ClInclude Include="TestRTTI.h" />
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="ActionTests.cpp" />
     <ClCompile Include="AttributedFoo.cpp" />
     <ClCompile Include="AttributedTest.cpp" />
     <ClCompile Include="DatumTest.cpp" />
+    <ClCompile Include="DebugAction.cpp" />
     <ClCompile Include="FactoryTest.cpp" />
     <ClCompile Include="Foo.cpp" />
     <ClCompile Include="FooJsonParseHelper.cpp" />
@@ -283,6 +286,8 @@ xcopy /Y /E "$(ProjectDir)Content" "$(OutDir)Content"</Command>
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
+    <None Include="Content\ActionLevel.json" />
+    <None Include="Content\Exprn.json" />
     <None Include="Content\level.json" />
     <None Include="Content\scope.json" />
     <None Include="packages.config" />

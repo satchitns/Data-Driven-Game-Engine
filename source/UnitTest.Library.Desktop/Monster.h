@@ -8,9 +8,7 @@ namespace UnitTestLibraryDesktop
 	public:
 		Monster();
 		virtual ~Monster() = default;
-		Monster(const Monster& other);
 		Monster(Monster&& other);
-		Monster& operator=(const Monster& other);
 		Monster& operator=(Monster&& other);
 	private:
 		int mHealth = 0;

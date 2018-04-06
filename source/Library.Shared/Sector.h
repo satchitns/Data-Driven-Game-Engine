@@ -16,9 +16,7 @@ namespace FieaGameEngine
 	public:
 		Sector();
 		~Sector() = default;
-		Sector(const Sector& other);
 		Sector(Sector&& other);
-		Sector& operator=(const Sector& other);
 		Sector& operator=(Sector&& other);
 
 		/**

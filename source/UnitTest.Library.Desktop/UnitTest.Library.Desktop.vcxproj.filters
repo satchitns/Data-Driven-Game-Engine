@@ -45,6 +45,9 @@
     <ClInclude Include="Monster.h">
       <Filter>Support Classes</Filter>
     </ClInclude>
+    <ClInclude Include="DebugAction.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="stdafx.cpp">
@@ -95,6 +98,12 @@
     <ClCompile Include="WorldParseTest.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="DebugAction.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="ActionTests.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
@@ -102,6 +111,12 @@
       <Filter>Support Classes</Filter>
     </None>
     <None Include="Content\scope.json">
+      <Filter>Support Classes</Filter>
+    </None>
+    <None Include="Content\ActionLevel.json">
+      <Filter>Support Classes</Filter>
+    </None>
+    <None Include="Content\Exprn.json">
       <Filter>Support Classes</Filter>
     </None>
   </ItemGroup>

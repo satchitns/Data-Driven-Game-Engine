@@ -1,5 +1,6 @@
 #pragma once
 #include "Vector.h" 
+#include <cassert>
 
 namespace FieaGameEngine
 {
@@ -12,6 +13,16 @@ namespace FieaGameEngine
 		{
 			Reserve(capacity);
 			mCapacity = capacity;
+		}
+	}
+
+	template<typename T, typename Increment>
+	inline Vector<T, Increment>::Vector(const std::initializer_list<T>& list)
+		:Vector(static_cast<uint32_t>(list.size()))
+	{
+		for (const auto &value : list)
+		{
+			PushBack(value);
 		}
 	}
 
@@ -157,6 +168,22 @@ namespace FieaGameEngine
 	}
 
 	template<typename T, typename Increment>
+	typename Vector<T, Increment>::Iterator Vector<T, Increment>::Insert(const T & value, uint32_t index)
+	{
+		assert(index <= mSize);
+		if (index == mSize)
+		{
+			return PushBack(value);
+		}
+		Reserve(std::_Max_value(1U, mIncrementor(mSize, mCapacity)));
+		uint32_t numBytesToShift = (mSize - index) * sizeof(T);
+		memmove_s(&mData[index + 1], numBytesToShift, &mData[index], numBytesToShift);
+		new (mData + index)T(value);
+		++mSize;
+		return Iterator(index, *this);
+	}
+
+	template<typename T, typename Increment>
 	Vector<T, Increment>::Vector(const Vector& other)
 		:Vector(other.mCapacity)
 	{
@@ -251,6 +278,17 @@ namespace FieaGameEngine
 		uint32_t numBytesToShift = (mSize - 1 - position.mIndex) * sizeof(T);
 		mData[position.mIndex].~T();
 		memmove_s(&mData[position.mIndex], numBytesToShift, &mData[position.mIndex + 1], numBytesToShift);
+		--mSize;
+		return true;
+	}
+
+	template<typename T, typename Increment>
+	bool Vector<T, Increment>::RemoveAt(uint32_t position)
+	{
+		assert(position < mSize);
+		uint32_t numBytesToShift = (mSize - 1 - position) * sizeof(T);
+		mData[position].~T();
+		memmove_s(&mData[position], numBytesToShift, &mData[position + 1], numBytesToShift);
 		--mSize;
 		return true;
 	}

@@ -3,44 +3,37 @@
 #include "Sector.h"
 #include "WorldState.h"
 #include "Entity.h"
+#include "Action.h"
+#include "Factory.h"
 
 namespace FieaGameEngine
 {
 	RTTI_DEFINITIONS(Entity)
+		
+	const std::string Entity::sActions{ "Actions" };
 
 	Entity::Entity()
-		:Attributed(TypeIdInstance())
+		:Entity(TypeIdInstance())
 	{
-		AddExternalAttribute("Name", mName);
+	}
+
+	Datum & Entity::Actions() const
+	{
+		assert(mActions != nullptr);
+		return *mActions;
 	}
 
 	Entity::Entity(uint64_t id)
 		: Attributed(id)
 	{
 		AddExternalAttribute("Name", mName);
-	}
-
-	Entity::Entity(const Entity& other)
-		:Attributed(other), mName(other.mName)
-	{
-		UpdateExternalAttribute("Name", mName);
+		mActions = &CreateNestedScope(Entity::sActions);
 	}
 
 	Entity::Entity(Entity&& other)
 		: Attributed(other), mName(std::move(other.mName))
 	{
 		UpdateExternalAttribute("Name", mName);
-	}
-
-	Entity& Entity::operator=(const Entity& other)
-	{
-		if (this != &other)
-		{
-			Attributed::operator=(other);
-			mName = other.mName;
-			UpdateExternalAttribute("Name", mName);
-		}
-		return *this;
 	}
 
 	Entity& Entity::operator=(Entity&& other)
@@ -67,7 +60,7 @@ namespace FieaGameEngine
 	Sector * Entity::GetSector() const
 	{
 		Scope* parentScope = GetParent();
-		assert(parentScope->Is(Sector::TypeName()));
+		assert(parentScope->Is(Sector::TypeIdClass()));
 		Sector* parent = static_cast<Sector*>(parentScope);
 		return parent;
 	}
@@ -76,10 +69,29 @@ namespace FieaGameEngine
 	{	
 		sector.Adopt(this, Sector::sEntities);
 	}
+
 	void Entity::Update(WorldState & state)
 	{
 		state.Entity = this;
-		//TODO : actions
+		for (uint32_t i = 0; i < mActions->Size(); ++i)
+		{
+			Scope* scope = mActions->Get<Scope*>(i);
+			assert(scope->Is(Action::TypeIdClass()));
+			Action *action = static_cast<Action*>(scope);
+			action->Update(state);
+		}
 		state.Entity = nullptr;
+	}
+
+	Action* Entity::CreateAction(const std::string & className, const std::string & instanceName)
+	{
+		Action* action = Factory<Action>::Create(className);
+		if (action == nullptr)
+		{
+			throw std::exception("Action factory error - type not found");
+		}
+		action->SetName(instanceName);
+		action->SetEntity(*this);
+		return action;
 	}
 }
