@@ -430,5 +430,18 @@ namespace FieaGameEngine
 		}
 		mSize = size;
 	}
+
+	template<typename T, typename Increment>
+	Vector<T, Increment>& Vector<T, Increment>::Append(const Vector& other)
+	{
+		if (other.mSize > 0)
+		{
+			for (const auto & value : other)
+			{
+				PushBack(value);
+			}
+		}
+		return *this;
+	}
 #pragma endregion
 }

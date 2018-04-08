@@ -275,6 +275,7 @@ xcopy /Y /E "$(ProjectDir)Content" "$(OutDir)Content"</Command>
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|x64'">Create</PrecompiledHeader>
     </ClCompile>
     <ClCompile Include="SListTest.cpp" />
+    <ClCompile Include="TestInit.cpp" />
     <ClCompile Include="TestRTTI.cpp" />
     <ClCompile Include="VectorTest.cpp" />
     <ClCompile Include="JsonParseTests.cpp" />

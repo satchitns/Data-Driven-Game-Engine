@@ -16,27 +16,8 @@ namespace FieaGameEngine
 	Sector::Sector()
 		:Attributed(TypeIdInstance())
 	{
-		AddExternalAttribute("Name", mName);
-		mEntities = &CreateNestedScope(Sector::sEntities);
-	}
-
-	Sector::Sector(Sector&& other)
-		: Attributed(other), mName(std::move(other.mName))
-	{
-		UpdateExternalAttribute("Name", mName);
-		mEntities = other.mEntities;
-	}
-
-	Sector& Sector::operator=(Sector&& other)
-	{
-		if (this != &other)
-		{
-			Attributed::operator=(std::move(other));
-			mName = std::move(other.mName);
-			mEntities = other.mEntities;
-			UpdateExternalAttribute("Name", mName);
-		}
-		return *this;
+		mEntities = Find(sEntities);
+		assert(mEntities != nullptr);
 	}
 
 	const std::string & Sector::Name() const

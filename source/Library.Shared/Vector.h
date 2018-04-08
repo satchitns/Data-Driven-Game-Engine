@@ -291,6 +291,8 @@ namespace FieaGameEngine
 		*@brief shrinks the capacity down to size
 		**/
 		void Shrink();
+
+		Vector& Append(const Vector& other);
 	private:
 		T * mData;
 		uint32_t mCapacity;

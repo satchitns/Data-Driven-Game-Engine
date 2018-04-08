@@ -14,9 +14,9 @@ namespace FieaGameEngine
 		Action() = delete;
 		virtual ~Action() = default;
 		Action(const Action&) = delete;
-		Action(Action&&);
+		Action(Action&&) = default;
 		Action& operator=(const Action&) = delete;
-		Action& operator=(Action&&);
+		Action& operator=(Action&&) = default;
 
 		/**
 		*@brief Update function that needs to be overloaded in concrete actions
@@ -48,6 +48,13 @@ namespace FieaGameEngine
 		**/
 		void SetParent(ActionList& list);
 
+		static Vector<Signature> Signatures()
+		{
+			return Vector<Signature>
+			{
+				Signature("Name", FieaGameEngine::Datum::DatumType::STRING, 1, offsetof(Action, mName))
+			};
+		}
 	protected:
 		Action(uint64_t);
 	private:

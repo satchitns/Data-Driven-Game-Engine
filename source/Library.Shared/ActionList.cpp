@@ -12,28 +12,14 @@ namespace FieaGameEngine
 	ActionList::ActionList()
 		:ActionList(TypeIdInstance())
 	{
+	
 	}
 
 	ActionList::ActionList(uint64_t id)
 		: Action(id)
 	{
-		mActions = &CreateNestedScope(sActions);
-	}
-
-	ActionList::ActionList(ActionList&& other)
-		: Action(std::move(other))
-	{
-		mActions = other.mActions;
-	}
-
-	ActionList& ActionList::operator=(ActionList&& other)
-	{
-		if (this != &other)
-		{
-			Action::operator=(std::move(other));
-			mActions = other.mActions;
-		}
-		return *this;
+		mActions = Find(sActions);
+		assert(mActions != nullptr);
 	}
 
 	void ActionList::Update(WorldState & worldState)

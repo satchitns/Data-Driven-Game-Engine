@@ -8,28 +8,9 @@ namespace FieaGameEngine
 	ActionListIf::ActionListIf()
 		:ActionList(TypeIdInstance())
 	{
-		AddExternalAttribute("Condition", mCondition);
-		mIfDatum = &CreateNestedScope("If");
-		mElseDatum = &CreateNestedScope("Else");
-	}
-
-	ActionListIf::ActionListIf(ActionListIf&& other)
-		:ActionList(std::move(other)), mCondition(other.mCondition), mIfDatum(other.mIfDatum), mElseDatum(other.mElseDatum)
-	{
-		UpdateExternalAttribute("Condition", mCondition);
-	}
-
-	ActionListIf & ActionListIf::operator=(ActionListIf &&other)
-	{
-		if (this != &other)
-		{
-			ActionList::operator=(std::move(other));
-			mCondition = other.mCondition;
-			mIfDatum = other.mIfDatum;
-			mElseDatum = other.mElseDatum;
-			UpdateExternalAttribute("Condition", mCondition);
-		}
-		return *this;
+		mIfDatum = Find("If");
+		mElseDatum = Find("Else");
+		assert(mIfDatum != nullptr && mElseDatum != nullptr);
 	}
 
 	void ActionListIf::Update(WorldState & worldState)

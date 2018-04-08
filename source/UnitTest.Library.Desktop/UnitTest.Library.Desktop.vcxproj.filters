@@ -46,7 +46,7 @@
       <Filter>Support Classes</Filter>
     </ClInclude>
     <ClInclude Include="DebugAction.h">
-      <Filter>Header Files</Filter>
+      <Filter>Support Classes</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -98,11 +98,14 @@
     <ClCompile Include="WorldParseTest.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="DebugAction.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
     <ClCompile Include="ActionTests.cpp">
       <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="TestInit.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="DebugAction.cpp">
+      <Filter>Support Classes</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

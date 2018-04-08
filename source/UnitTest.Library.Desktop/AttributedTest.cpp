@@ -58,32 +58,21 @@ namespace UnitTestLibraryDesktop
 			AttributedFoo xFoo, yFoo;
 			xFoo = nFoo;
 			yFoo = move(nFoo);
+			yFoo.mHealth = 100.0f;
 			yFoo.AppendAuxiliaryAttribute("AuxiliaryHealth");
 			auto exprn0 = [&yFoo] {yFoo.AppendAuxiliaryAttribute("Health"); };
 			Assert::ExpectException<exception>(exprn0);
 			Vector<Scope::TableElement> aVector = yFoo.AuxiliaryAttributes();
 			Assert::AreEqual(1U, aVector.Size());
-			Vector<string> pVector = yFoo.PrescribedAttributes();
-			Assert::AreEqual(19U, pVector.Size());
+			Vector<Attributed::Signature> pVector = yFoo.PrescribedAttributes();
+			Assert::AreEqual(11U, pVector.Size());
 			Vector<Scope::TableElement> vector = yFoo.Attributes();
-			Assert::AreEqual(20U, vector.Size());
-			auto exprn1 = [&yFoo] {yFoo.BadUpdateScope1(); };
-			Assert::ExpectException<exception>(exprn1);
-			auto exprn2 = [&yFoo] {yFoo.BadUpdateScope2(); };
-			Assert::ExpectException<exception>(exprn2);
-			auto exprn3 = [&yFoo] {yFoo.BadUpdateScope3(); };
-			Assert::ExpectException<exception>(exprn3);
-			auto exprn4 = [&yFoo] {yFoo.BadUpdateScope4(); };
-			Assert::ExpectException<exception>(exprn4);
-			auto exprn5 = [&yFoo] {yFoo.BadUpdateScope5(); };
-			Assert::ExpectException<exception>(exprn5);
-			auto exprn6 = [&yFoo] {yFoo.BadUpdateScope6(); };
-			Assert::ExpectException<exception>(exprn6);
+			Assert::AreEqual(13U, vector.Size());
 			Assert::IsFalse(yFoo.IsAttribute("BanjoKazooie"));
 			Assert::IsTrue(yFoo.IsAuxiliaryAttribute("AuxiliaryHealth"));
 			yFoo.strArray[2] = "hello";
 			Assert::IsTrue("hello" == yFoo["StrArray"].Get<string>(2));
-			Assert::IsTrue(100.0f == yFoo["Health1"].Get<float>(0));
+			Assert::IsTrue(100.0f == yFoo["Health"].Get<float>(0));
 		}
 	private:
 		static _CrtMemState sStartMemState;

@@ -211,6 +211,17 @@ namespace FieaGameEngine
 
 		/**
 		*@brief Sets storage to an external array
+		*@param data - void array to set storage to
+		*@count - number of elements in the array (cannot be verified)
+		*@throws exception if count is 0
+		*@throws exception if array is already internal and contains elements
+		*@throws exception if type was already set to a different type
+		*@throws exception if array is nullptr
+		**/
+		void SetStorage(void* data, uint32_t count);
+
+		/**
+		*@brief Sets storage to an external array
 		*@param data - int array to set storage to
 		*@count - number of elements in the array (cannot be verified)
 		*@throws exception if count is 0

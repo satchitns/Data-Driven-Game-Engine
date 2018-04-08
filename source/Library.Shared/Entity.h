@@ -17,9 +17,9 @@ namespace FieaGameEngine
 		Entity();
 		virtual ~Entity() = default;
 		Entity(const Entity& other) = delete;
-		Entity(Entity&& other);
+		Entity(Entity&& other) = default;
 		Entity& operator=(const Entity&) = delete;
-		Entity& operator=(Entity&& other);
+		Entity& operator=(Entity&& other) = default;
 
 		/**
 		*@brief Returns the name of the entity
@@ -65,6 +65,15 @@ namespace FieaGameEngine
 		**/
 		class Action* CreateAction(const std::string & className, const std::string & instanceName);
 		
+		static Vector<Signature> Signatures()
+		{
+			return Vector<Signature>
+			{
+				Signature("Name", FieaGameEngine::Datum::DatumType::STRING, 1, offsetof(Entity, mName)),
+				Signature(sActions, FieaGameEngine::Datum::DatumType::TABLE)
+			};
+		}
+
 		static const std::string sActions;
 	protected:
 		Entity(uint64_t);

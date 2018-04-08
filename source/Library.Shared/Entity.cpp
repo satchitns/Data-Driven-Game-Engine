@@ -26,26 +26,10 @@ namespace FieaGameEngine
 	Entity::Entity(uint64_t id)
 		: Attributed(id)
 	{
-		AddExternalAttribute("Name", mName);
-		mActions = &CreateNestedScope(Entity::sActions);
+		mActions = Find(sActions);
+		assert(mActions != nullptr);
 	}
 
-	Entity::Entity(Entity&& other)
-		: Attributed(other), mName(std::move(other.mName))
-	{
-		UpdateExternalAttribute("Name", mName);
-	}
-
-	Entity& Entity::operator=(Entity&& other)
-	{
-		if (this != &other)
-		{
-			Attributed::operator=(std::move(other));
-			mName = std::move(other.mName);
-			UpdateExternalAttribute("Name", mName);
-		}
-		return *this;
-	}
 
 	const std::string & Entity::Name() const
 	{

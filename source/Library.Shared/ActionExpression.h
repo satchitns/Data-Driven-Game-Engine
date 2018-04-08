@@ -60,9 +60,9 @@ namespace FieaGameEngine
 		ActionExpression();
 		~ActionExpression() = default;
 		ActionExpression(const ActionExpression&) = delete;
-		ActionExpression(ActionExpression&&);
+		ActionExpression(ActionExpression&&) = default;
 		ActionExpression& operator=(const ActionExpression&) = delete;
-		ActionExpression& operator=(ActionExpression&&);
+		ActionExpression& operator=(ActionExpression&&) = default;
 
 		/**
 		*@brief Method to parse an infix expression into a vector in RPN notation
@@ -84,7 +84,15 @@ namespace FieaGameEngine
 		{
 			return mString;
 		}
+
 		Token Result;
+
+		static Vector<Signature> Signatures()
+		{
+			return Action::Signatures().Append({
+				Signature("String", FieaGameEngine::Datum::DatumType::STRING, 1, offsetof(ActionExpression, mString))
+			});
+		}
 	private:
 		Vector<Token> mTokenVector;
 		std::string mString;

@@ -8,8 +8,17 @@ namespace UnitTestLibraryDesktop
 	public:
 		Monster();
 		virtual ~Monster() = default;
-		Monster(Monster&& other);
-		Monster& operator=(Monster&& other);
+		Monster(const Monster& other) = delete;
+		Monster& operator=(const Monster& other) = delete;
+		Monster(Monster&& other) = default;
+		Monster& operator=(Monster&& other) = default;
+
+		static FieaGameEngine::Vector<Signature> Signatures()
+		{
+			return Entity::Signatures().Append({
+			Signature("Health", FieaGameEngine::Datum::DatumType::INTEGER, 1, offsetof(Monster, mHealth))
+			});
+		}
 	private:
 		int mHealth = 0;
 	};

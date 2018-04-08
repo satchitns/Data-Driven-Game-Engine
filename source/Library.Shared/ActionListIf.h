@@ -10,9 +10,9 @@ namespace FieaGameEngine
 		ActionListIf();
 		~ActionListIf() = default;
 		ActionListIf(const ActionListIf&) = delete;
-		ActionListIf(ActionListIf&&);
+		ActionListIf(ActionListIf&&) = default;
 		ActionListIf& operator=(const ActionListIf&) = delete;
-		ActionListIf& operator=(ActionListIf&&);
+		ActionListIf& operator=(ActionListIf&&) = default;
 
 		/**
 		*@brief Update function that calls either the if Action or the else Action's update
@@ -50,9 +50,18 @@ namespace FieaGameEngine
 		*@param condition integer reference
 		**/
 		int& Condition()
-		{ 
-			return mCondition; 
+		{
+			return mCondition;
 		};
+
+		static Vector<Signature> Signatures()
+		{
+			return ActionList::Signatures().Append({
+				Signature("Condition", FieaGameEngine::Datum::DatumType::INTEGER, 1, offsetof(ActionListIf, mCondition)),
+				Signature("If", FieaGameEngine::Datum::DatumType::TABLE),
+				Signature("Else", FieaGameEngine::Datum::DatumType::TABLE)
+			});
+		}
 	private:
 		int mCondition = 0;
 		Datum* mIfDatum = nullptr;

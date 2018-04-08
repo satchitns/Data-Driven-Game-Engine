@@ -24,6 +24,7 @@
     <ClCompile Include="$(MSBuildThisFileDirectory)ActionExpression.cpp" />
     <ClCompile Include="$(MSBuildThisFileDirectory)ActionCreateAction.cpp" />
     <ClCompile Include="$(MSBuildThisFileDirectory)ActionDestroyAction.cpp" />
+    <ClCompile Include="$(MSBuildThisFileDirectory)TypeManager.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="$(MSBuildThisFileDirectory)Attributed.h" />
@@ -57,6 +58,7 @@
     <ClInclude Include="$(MSBuildThisFileDirectory)ActionExpression.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)ActionCreateAction.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)ActionDestroyAction.h" />
+    <ClInclude Include="$(MSBuildThisFileDirectory)TypeManager.h" />
   </ItemGroup>
   <ItemGroup>
     <None Include="$(MSBuildThisFileDirectory)HashMap.inl" />

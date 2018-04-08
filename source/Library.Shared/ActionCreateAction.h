@@ -9,9 +9,9 @@ namespace FieaGameEngine
 		ActionCreateAction();
 		~ActionCreateAction() = default;
 		ActionCreateAction(const ActionCreateAction&) = delete;
-		ActionCreateAction(ActionCreateAction&&);
+		ActionCreateAction(ActionCreateAction&&) = default;
 		ActionCreateAction& operator=(const ActionCreateAction&) = delete;
-		ActionCreateAction& operator=(ActionCreateAction&&);
+		ActionCreateAction& operator=(ActionCreateAction&&) = default;
 
 		/**
 		*@brief Update function that creates the given action and appends it in parent container
@@ -35,6 +35,14 @@ namespace FieaGameEngine
 		std::string& InstanceName()
 		{
 			return mInstanceName;
+		}
+
+		static Vector<Signature> Signatures()
+		{
+			return Action::Signatures().Append({
+				Signature("InstanceName", FieaGameEngine::Datum::DatumType::STRING, 1, offsetof(ActionCreateAction, mInstanceName)),
+				Signature("Prototype", FieaGameEngine::Datum::DatumType::STRING, 1, offsetof(ActionCreateAction, mPrototype))
+			});
 		}
 
 	private:

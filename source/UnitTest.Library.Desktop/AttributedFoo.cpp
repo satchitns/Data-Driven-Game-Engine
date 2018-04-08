@@ -11,7 +11,6 @@ namespace UnitTestLibraryDesktop
 		AttributedFoo::AttributedFoo()
 		:Attributed(TypeIdInstance()), mFoo(new Foo())
 	{
-		InitializeScope();
 	}
 
 
@@ -30,7 +29,6 @@ namespace UnitTestLibraryDesktop
 		std::copy(begin(other.vecArray), end(other.vecArray), vecArray);
 		std::copy(begin(other.matArray), end(other.matArray), matArray);
 		*mFoo = *other.mFoo;
-		UpdateScope();
 	}
 
 	AttributedFoo::AttributedFoo(AttributedFoo&& other)
@@ -48,7 +46,6 @@ namespace UnitTestLibraryDesktop
 		other.mFoo = nullptr;
 		other.mPosition = vec4(0);
 		other.mTransform = mat4(0);
-		UpdateScope();
 	}
 
 	AttributedFoo& AttributedFoo::operator=(const AttributedFoo& other)
@@ -67,7 +64,6 @@ namespace UnitTestLibraryDesktop
 			std::copy(begin(other.vecArray), end(other.vecArray), vecArray);
 			std::copy(begin(other.matArray), end(other.matArray), matArray);
 			*mFoo = *other.mFoo;
-			UpdateScope();
 		}
 		return *this;
 	}
@@ -94,12 +90,11 @@ namespace UnitTestLibraryDesktop
 			other.mHealth = 0.0f;
 			other.mPosition = vec4(0);
 			other.mTransform = mat4(0);
-			UpdateScope();
 		}
 		return *this;
 	}
 
-	void AttributedFoo::InitializeScope()
+	/*void AttributedFoo::InitializeScope()
 	{
 		AddExternalAttribute("Count", mCount);
 		AddExternalAttribute("Health", mHealth);
@@ -140,35 +135,5 @@ namespace UnitTestLibraryDesktop
 		UpdateExternalAttribute("MatArray", matArray[0], 3);
 		UpdateExternalAttribute("VecArray", vecArray[0], 3);
 		UpdateExternalAttribute("StrArray", strArray[0], 3);
-	}
-
-	void AttributedFoo::BadUpdateScope1()
-	{
-		UpdateExternalAttribute("Count1", mCount);
-	}
-
-	void AttributedFoo::BadUpdateScope2()
-	{
-		UpdateExternalAttribute("Health1", mHealth);
-	}
-
-	void AttributedFoo::BadUpdateScope3()
-	{
-		UpdateExternalAttribute("Position1", mPosition);
-	}
-
-	void AttributedFoo::BadUpdateScope4()
-	{
-		UpdateExternalAttribute("Transform1", mTransform);
-	}
-
-	void AttributedFoo::BadUpdateScope5()
-	{
-		UpdateExternalAttribute("Aliases1", mName, 1);
-	}
-
-	void AttributedFoo::BadUpdateScope6()
-	{
-		UpdateExternalAttribute("Foo1", mFoo);
-	}
+	}*/
 }

@@ -43,26 +43,6 @@ namespace FieaGameEngine
 	ActionExpression::ActionExpression()
 		:Action(TypeIdInstance())
 	{
-		AddExternalAttribute("String", mString);
-	}
-
-	ActionExpression::ActionExpression(ActionExpression&& other)
-		: Action(std::move(other)), mString(std::move(other.mString)), Result(std::move(other.Result)), mTokenVector(std::move(other.mTokenVector))
-	{
-
-		UpdateExternalAttribute("String", mString);
-	}
-
-	ActionExpression & ActionExpression::operator=(ActionExpression && other)
-	{
-		if (this != &other)
-		{
-			mString = std::move(other.mString);
-			Result = std::move(other.Result);
-			mTokenVector = std::move(other.mTokenVector);
-			UpdateExternalAttribute("String", mString);
-		}
-		return *this;
 	}
 
 	void ActionExpression::ParseIntoVector(const std::string & expression)

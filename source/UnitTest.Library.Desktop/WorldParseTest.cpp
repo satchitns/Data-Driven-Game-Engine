@@ -103,6 +103,7 @@ namespace UnitTestLibraryDesktop
 			GameClock clock;
 			World *world = new World(time, clock);
 			world->SetName("BobWorld");
+			Assert::AreEqual(world->Find("Name")->Get<string>().c_str(), "BobWorld");
 			TableSharedData data(*world);
 			JsonParseMaster master(data);
 			JsonParseHelperTable helper;
@@ -166,17 +167,6 @@ namespace UnitTestLibraryDesktop
 
 	private:
 		static _CrtMemState sStartMemState;
-		GameTime dummyTime;
-		GameClock dummyClock;
-		World dummyWorld = { dummyTime, dummyClock };
-		Sector dummySector;
-		Entity dummyEntity;
-		Monster dummyMonster;
-		DebugAction dummyDebugAction;
-		ActionList dummyList;
-		ActionListIf dummyIfAction;
-		ActionCreateAction dummyActionCreate;
-		ActionDestroyAction dummyActionDestroy;
 	};
 	_CrtMemState WorldParseTest::sStartMemState;
 }

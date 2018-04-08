@@ -15,7 +15,58 @@ namespace FieaGameEngine
 	{
 		RTTI_DECLARATIONS(Attributed, Scope)
 	public:
-		typedef std::pair<const Attributed*, Vector<std::string >> StaticPair;
+
+		class Signature
+		{
+		public:
+
+			Signature(const std::string& name, Datum::DatumType type, uint32_t size = 0, uint32_t offset = 0)
+				:mName(name), mType(type), mSize(size), mOffset(offset)
+			{
+			}
+
+			/**
+			*@brief accessor for name
+			*@return name const string reference
+			**/
+			const std::string& Name() const
+			{
+				return mName;
+			}
+
+			/**
+			*@brief accessor for size
+			*@return size
+			**/
+			uint32_t Size() const
+			{
+				return mSize;
+			}
+
+			/**
+			*@brief accessor for offset
+			*@return offset
+			**/
+			uint32_t Offset() const
+			{
+				return mOffset;
+			}
+
+			/**
+			*@brief accessor for type
+			*@return type
+			**/
+			Datum::DatumType Type() const
+			{
+				return mType;
+			}
+
+		private:
+			std::string mName;
+			Datum::DatumType mType = Datum::DatumType::UNKNOWN;
+			uint32_t mSize;
+			uint32_t mOffset;
+		};
 
 		/**
 		*@brief constructor
@@ -93,7 +144,7 @@ namespace FieaGameEngine
 		*@brief Accessor for prescribed attributes
 		*@return const reference to a vector of names
 		**/
-		const Vector<std::string>& PrescribedAttributes() const;
+		const Vector<Signature>& PrescribedAttributes() const;
 
 		/**
 		*@brief Accessor for auxiliary attributes
@@ -101,168 +152,18 @@ namespace FieaGameEngine
 		**/
 		Vector<TableElement> AuxiliaryAttributes() const;
 	protected:
+
+	private:	
 		/**
-		*@brief hashmap to store a vector of prescribed attributes for each type inheriting from attributed
+		*@brief Update external prescribed attributes for a class
+		*@param Type ID of class to update
 		**/
-		static HashMap <uint64_t, StaticPair> PrescribedMap;
+		void UpdateExternalStorage(uint64_t typeId);
 
 		/**
-		*@brief Method to add an internal prescribed attribute
-		*@param name - name of the attribute
-		*@param initialValue - starting Value
-		*@param size - number of elements to allocate
+		*@brief Populate the scope with the prescribed attributes
+		*@param Type ID of class to populate
 		**/
-		void AddInternalAttribute(const std::string& name, const int32_t& initialValue, uint32_t size = 1);
-
-		/**
-		*@brief Method to add an internal prescribed attribute
-		*@param name - name of the attribute
-		*@param initialValue - starting Value
-		*@param size - number of elements to allocate
-		**/
-		void AddInternalAttribute(const std::string& name, const float& initialValue, uint32_t size = 1);
-
-		/**
-		*@brief Method to add an internal prescribed attribute
-		*@param name - name of the attribute
-		*@param initialValue - starting Value
-		*@param size - number of elements to allocate
-		**/
-		void AddInternalAttribute(const std::string& name, const glm::mat4& initialValue, uint32_t size = 1);
-
-		/**
-		*@brief Method to add an internal prescribed attribute
-		*@param name - name of the attribute
-		*@param initialValue - starting Value
-		*@param size - number of elements to allocate
-		**/
-		void AddInternalAttribute(const std::string& name, const glm::vec4& initialValue, uint32_t size = 1);
-
-		/**
-		*@brief Method to add an internal prescribed attribute
-		*@param name - name of the attribute
-		*@param initialValue - starting Value
-		*@param size - number of elements to allocate
-		**/
-		void AddInternalAttribute(const std::string& name, const std::string& initialValue, uint32_t size = 1);
-
-		/**
-		*@brief Method to add an internal prescribed attribute
-		*@param name - name of the attribute
-		*@param initialValue - starting Value
-		*@param size - number of elements to allocate
-		**/
-		void AddInternalAttribute(const std::string& name, RTTI* const & initialValue, uint32_t size = 1);
-
-		/**
-		*@brief Method to add a scope within this scope
-		*@param name - name of the scope's datum
-		**/
-		void AddNestedScope(const std::string& name);
-
-		/**
-		*@brief Method to create a scope within this scope
-		*@param name - name of the scope's datum
-		**/
-		Datum& CreateNestedScope(const std::string& name);
-
-		/**
-		*@brief Method to add an external prescribed attribute (usually mapped to the class's data member)
-		*@param name - name of the attribute
-		*@param address - address of external storage (data member)
-		*@param size - number of elements
-		**/
-		void AddExternalAttribute(const std::string& name, int32_t& address, uint32_t size = 1);
-
-		/**
-		*@brief Method to add an external prescribed attribute (usually mapped to the class's data member)
-		*@param name - name of the attribute
-		*@param address - address of external storage (data member)
-		*@param size - number of elements
-		**/
-		void AddExternalAttribute(const std::string& name, float& address, uint32_t size = 1);
-
-		/**
-		*@brief Method to add an external prescribed attribute (usually mapped to the class's data member)
-		*@param name - name of the attribute
-		*@param address - address of external storage (data member)
-		*@param size - number of elements
-		**/
-		void AddExternalAttribute(const std::string& name, glm::mat4& address, uint32_t size = 1);
-
-		/**
-		*@brief Method to add an external prescribed attribute (usually mapped to the class's data member)
-		*@param name - name of the attribute
-		*@param address - address of external storage (data member)
-		*@param size - number of elements
-		**/
-		void AddExternalAttribute(const std::string& name, glm::vec4& address, uint32_t size = 1);
-
-		/**
-		*@brief Method to add an external prescribed attribute (usually mapped to the class's data member)
-		*@param name - name of the attribute
-		*@param address - address of external storage (data member)
-		*@param size - number of elements
-		**/
-		void AddExternalAttribute(const std::string& name, std::string& address, uint32_t size = 1);
-
-		/**
-		*@brief Method to add an external prescribed attribute (usually mapped to the class's data member)
-		*@param name - name of the attribute
-		*@param address - address of external storage (data member)
-		*@param size - number of elements
-		**/
-		void AddExternalAttribute(const std::string& name, RTTI* & address, uint32_t size = 1);
-
-		/**
-		*@brief Method to update address of an external prescribed attribute (usually mapped to the class's data member)
-		*@param name - name of the attribute
-		*@param address - address of external storage (data member)
-		*@param size - number of elements
-		**/
-		void UpdateExternalAttribute(const std::string& name, int32_t& address, uint32_t size = 1);
-
-		/**
-		*@brief Method to update address of an external prescribed attribute (usually mapped to the class's data member)
-		*@param name - name of the attribute
-		*@param address - address of external storage (data member)
-		*@param size - number of elements
-		**/
-		void UpdateExternalAttribute(const std::string& name, float& address, uint32_t size = 1);
-
-		/**
-		*@brief Method to update address of an external prescribed attribute (usually mapped to the class's data member)
-		*@param name - name of the attribute
-		*@param address - address of external storage (data member)
-		*@param size - number of elements
-		**/
-		void UpdateExternalAttribute(const std::string& name, glm::mat4& address, uint32_t size = 1);
-
-		/**
-		*@brief Method to update address of an external prescribed attribute (usually mapped to the class's data member)
-		*@param name - name of the attribute
-		*@param address - address of external storage (data member)
-		*@param size - number of elements
-		**/
-		void UpdateExternalAttribute(const std::string& name, glm::vec4& address, uint32_t size = 1);
-
-		/**
-		*@brief Method to update address of an external prescribed attribute (usually mapped to the class's data member)
-		*@param name - name of the attribute
-		*@param address - address of external storage (data member)
-		*@param size - number of elements
-		**/
-		void UpdateExternalAttribute(const std::string& name, std::string& address, uint32_t size = 1);
-
-		/**
-		*@brief Method to update address of an external prescribed attribute (usually mapped to the class's data member)
-		*@param name - name of the attribute
-		*@param address - address of external storage (data member)
-		*@param size - number of elements
-		**/
-		void UpdateExternalAttribute(const std::string& name, RTTI* & address, uint32_t size = 1);
-
-	private:
-		void HandlePrescribedAttribute(const std::string& name) const;
+		void Populate(uint64_t typeId);
 	};
 }

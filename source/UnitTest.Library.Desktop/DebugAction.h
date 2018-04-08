@@ -10,12 +10,19 @@ namespace UnitTestLibraryDesktop
 		DebugAction();
 		~DebugAction() = default;
 		DebugAction(const DebugAction&) = delete;
-		DebugAction(DebugAction&&);
+		DebugAction(DebugAction&&) = default;
 		DebugAction& operator=(const DebugAction&) = delete;
-		DebugAction& operator=(DebugAction&&);
+		DebugAction& operator=(DebugAction&&) = default;
 
 		std::string& DebugAction::String();
 		void Update(FieaGameEngine::WorldState& state) override;
+
+		static FieaGameEngine::Vector<Signature> Signatures()
+		{
+			return Action::Signatures().Append({
+				Signature("DebugString", FieaGameEngine::Datum::DatumType::STRING, 1, offsetof(DebugAction, mString))
+			});
+		}
 	private:
 		std::string mString;
 	};

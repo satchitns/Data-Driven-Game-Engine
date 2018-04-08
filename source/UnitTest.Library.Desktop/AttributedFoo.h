@@ -1,6 +1,7 @@
 #pragma once
 #include "Attributed.h"
 #include "Foo.h"
+#include "Vector.h"
 
 namespace UnitTestLibraryDesktop
 {
@@ -20,14 +21,23 @@ namespace UnitTestLibraryDesktop
 		glm::mat4 mTransform, matArray[3];
 		std::string mName, strArray[3];
 		RTTI* mFoo;
-		void BadUpdateScope1();
-		void BadUpdateScope2();
-		void BadUpdateScope3();
-		void BadUpdateScope4();
-		void BadUpdateScope5();
-		void BadUpdateScope6();
-	private:
-		void InitializeScope();
-		void UpdateScope();
+
+		static FieaGameEngine::Vector<Signature> Signatures()
+		{
+			return FieaGameEngine::Vector<Signature>
+			{
+				Signature("Count", FieaGameEngine::Datum::DatumType::INTEGER, 1, offsetof(AttributedFoo, mCount)),
+					Signature("IntArray", FieaGameEngine::Datum::DatumType::INTEGER, 3, offsetof(AttributedFoo, intArray)),
+					Signature("Health", FieaGameEngine::Datum::DatumType::FLOAT, 1, offsetof(AttributedFoo, mHealth)),
+					Signature("FloatArray", FieaGameEngine::Datum::DatumType::FLOAT, 3, offsetof(AttributedFoo, floatArray)),
+					Signature("Position", FieaGameEngine::Datum::DatumType::VECTOR, 1, offsetof(AttributedFoo, mPosition)),
+					Signature("VecArray", FieaGameEngine::Datum::DatumType::VECTOR, 3, offsetof(AttributedFoo, vecArray)),
+					Signature("Transform", FieaGameEngine::Datum::DatumType::MATRIX, 1, offsetof(AttributedFoo, mTransform)),
+					Signature("MatArray", FieaGameEngine::Datum::DatumType::MATRIX, 3, offsetof(AttributedFoo, matArray)),
+					Signature("Name", FieaGameEngine::Datum::DatumType::STRING, 1, offsetof(AttributedFoo, mName)),
+					Signature("StrArray", FieaGameEngine::Datum::DatumType::STRING, 3, offsetof(AttributedFoo, strArray)),
+					Signature("Foo", FieaGameEngine::Datum::DatumType::POINTER, 1, offsetof(AttributedFoo, mFoo))
+			};
+		}
 	};
 }

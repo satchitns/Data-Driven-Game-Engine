@@ -350,6 +350,34 @@ namespace FieaGameEngine
 		mSize = mCapacity = size;
 	}
 
+	void Datum::SetStorage(void * data, uint32_t count)
+	{
+		switch (mType)
+		{
+		case DatumType::INTEGER:
+			SetStorage(reinterpret_cast<int*>(data), count);
+			break;
+		case DatumType::FLOAT:
+			SetStorage(reinterpret_cast<float*>(data), count);
+			break;
+		case DatumType::STRING:
+			SetStorage(reinterpret_cast<std::string*>(data), count);
+			break;
+		case DatumType::MATRIX:
+			SetStorage(reinterpret_cast<glm::mat4*>(data), count);
+			break;
+		case DatumType::VECTOR:
+			SetStorage(reinterpret_cast<glm::vec4*>(data), count);
+			break;
+		case DatumType::POINTER:
+			SetStorage(reinterpret_cast<RTTI**>(data), count);
+			break;
+		case DatumType::UNKNOWN: case DatumType::MAX:
+			throw std::exception("Type not set");
+			break;
+		}
+	}
+
 	void Datum::SetStorage(int32_t* data, uint32_t count)
 	{
 		if (data == nullptr)

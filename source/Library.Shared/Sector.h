@@ -16,8 +16,10 @@ namespace FieaGameEngine
 	public:
 		Sector();
 		~Sector() = default;
-		Sector(Sector&& other);
-		Sector& operator=(Sector&& other);
+		Sector(const Sector& other) = delete;
+		Sector& operator=(const Sector& other) = delete;
+		Sector(Sector&& other) = default;
+		Sector& operator=(Sector&& other) = default;
 
 		/**
 		*@brief Returns the name of the sector
@@ -62,6 +64,15 @@ namespace FieaGameEngine
 		*@return reference to entities datum
 		**/
 		Datum& Entities() const;
+
+		static Vector<Signature> Signatures()
+		{
+			return Vector<Signature>
+			{
+				Signature("Name", FieaGameEngine::Datum::DatumType::STRING, 1, offsetof(Sector, mName)),
+				Signature(sEntities, FieaGameEngine::Datum::DatumType::TABLE)
+			};
+		}
 
 		static const std::string sEntities;
 	private:

@@ -48,6 +48,7 @@ namespace UnitTestLibraryDesktop
 		TEST_CLASS(ActionTests)
 	{
 	public:
+
 		TEST_METHOD_INITIALIZE(Initialize)
 		{
 #ifdef _DEBUG
@@ -337,18 +338,6 @@ namespace UnitTestLibraryDesktop
 
 	private:
 		static _CrtMemState sStartMemState;
-		GameTime dummyTime;
-		GameClock dummyClock;
-		World dummyWorld = { dummyTime, dummyClock };
-		Sector dummySector;
-		Entity dummyEntity;
-		Monster dummyMonster;
-		DebugAction dummyDebugAction;
-		ActionList dummyList;
-		ActionListIf dummyIfAction;
-		ActionCreateAction dummyActionCreate;
-		ActionDestroyAction dummyActionDestroy;
-		ActionExpression dummyActionExpression;
 	};
 	_CrtMemState ActionTests::sStartMemState;
 }

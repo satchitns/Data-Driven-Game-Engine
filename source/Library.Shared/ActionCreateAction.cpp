@@ -11,28 +11,7 @@ namespace FieaGameEngine
 	ActionCreateAction::ActionCreateAction()
 		:Action(TypeIdInstance())
 	{
-		AddExternalAttribute("Prototype", mPrototype);
-		AddExternalAttribute("InstanceName", mInstanceName);
-	}
-
-	ActionCreateAction::ActionCreateAction(ActionCreateAction&& other)
-		:Action(std::move(other)), mPrototype(std::move(other.mPrototype)), mInstanceName(std::move(other.mInstanceName))
-	{
-		UpdateExternalAttribute("Prototype", mPrototype);
-		UpdateExternalAttribute("InstanceName", mInstanceName);
-	}
-
-	ActionCreateAction & ActionCreateAction::operator=(ActionCreateAction &&other)
-	{
-		if (this != &other)
-		{
-			Action::operator=(std::move(other));
-			mPrototype = std::move(other.mPrototype);
-			mInstanceName = std::move(other.mInstanceName);
-			UpdateExternalAttribute("Prototype", mPrototype);
-			UpdateExternalAttribute("InstanceName", mInstanceName);
-		}
-		return *this;
+	
 	}
 
 	void ActionCreateAction::Update(WorldState & state)

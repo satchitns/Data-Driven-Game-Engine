@@ -17,8 +17,10 @@ namespace FieaGameEngine
 	public:
 		World(GameTime& time, GameClock& clock);
 		~World() = default;
-		World(World&& other);
-		World& operator=(World&& other);
+		World(const World& other) = delete;
+		World& operator=(const World& other) = delete;
+		World(World&& other) = default;
+		World& operator=(World&& other) = default;
 
 		/**
 		*@brief Returns the name of the world
@@ -56,6 +58,15 @@ namespace FieaGameEngine
 		*@param scope to delete
 		**/
 		void QueueForDelete(Scope& scope);
+
+		static Vector<Signature> Signatures()
+		{
+			return Vector<Signature>
+			{
+				Signature("Name", FieaGameEngine::Datum::DatumType::STRING, 1, offsetof(World, mName)),
+				Signature(sSectors, FieaGameEngine::Datum::DatumType::TABLE)
+			};
+		}
 
 		static const std::string sSectors;
 	private:

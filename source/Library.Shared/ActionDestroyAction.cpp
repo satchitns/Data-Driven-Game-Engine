@@ -13,24 +13,6 @@ namespace FieaGameEngine
 	ActionDestroyAction::ActionDestroyAction()
 		:Action(TypeIdInstance())
 	{
-		AddExternalAttribute("InstanceName", mInstanceName);
-	}
-
-	ActionDestroyAction::ActionDestroyAction(ActionDestroyAction&& other)
-		: Action(std::move(other)), mInstanceName(std::move(other.mInstanceName))
-	{
-		UpdateExternalAttribute("InstanceName", mInstanceName);
-	}
-
-	ActionDestroyAction & ActionDestroyAction::operator=(ActionDestroyAction &&other)
-	{
-		if (this != &other)
-		{
-			Action::operator=(std::move(other));
-			mInstanceName = std::move(other.mInstanceName);
-			UpdateExternalAttribute("InstanceName", mInstanceName);
-		}
-		return *this;
 	}
 
 	void ActionDestroyAction::Update(WorldState & state)

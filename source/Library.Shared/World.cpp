@@ -12,35 +12,14 @@ namespace FieaGameEngine
 	const std::string World::sSectors{"Sectors"};
 		
 	World::World(GameTime& time, GameClock& clock)
-		:Attributed(TypeIdInstance())
+		:Attributed(TypeIdClass())
 	{
-		AddExternalAttribute("Name", mName);
 		mTime = &time;
 		mClock = &clock;
-		mSectors = &CreateNestedScope(World::sSectors);
+		mSectors = Find(sSectors);
+		assert(mSectors != nullptr);
 		mState.World = this;
 		mState.SetGameTime(*mTime);
-	}
-
-	World::World(World&& other)
-		: Attributed(other), mName(std::move(other.mName)), mTime(std::move(other.mTime)), mClock(std::move(other.mClock)), mState(std::move(other.mState))
-	{
-		UpdateExternalAttribute("Name", mName);
-		mSectors = other.mSectors;
-	}
-
-	World& World::operator=(World&& other)
-	{
-		if (this != &other)
-		{
-			Attributed::operator=(std::move(other));
-			mName = std::move(other.mName);
-			mTime = std::move(other.mTime);
-			mClock = std::move(other.mClock);
-			mSectors = other.mSectors;
-			UpdateExternalAttribute("Name", mName);
-		}
-		return *this;
 	}
 
 	Datum & World::Sectors() const

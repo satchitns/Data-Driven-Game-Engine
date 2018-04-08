@@ -612,6 +612,19 @@ namespace UnitTestLibraryDesktop
 			c.PushBack(b);
 			Assert::AreEqual(55, c.Back().Back());
 		}
+
+		TEST_METHOD(Vector_Append)
+		{
+			Vector<int> a, b, c;
+			a.PushBack(1);
+			a.PushBack(2);
+			b.PushBack(55);
+			b.PushBack(100);
+			a.Append(b);
+			Assert::AreEqual(a.Back(), b.Back());
+			a.Append(c);
+			Assert::AreEqual(a.Back(), b.Back());
+		}
 	private:
 		static _CrtMemState sStartMemState;
 	};

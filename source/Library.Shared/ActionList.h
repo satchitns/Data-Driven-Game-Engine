@@ -10,9 +10,9 @@ namespace FieaGameEngine
 		ActionList();
 		virtual ~ActionList() = default;
 		ActionList(const ActionList&) = delete;
-		ActionList(ActionList&&);
+		ActionList(ActionList&&) = default;
 		ActionList& operator=(const ActionList&) = delete;
-		ActionList& operator=(ActionList&&);
+		ActionList& operator=(ActionList&&) = default;
 
 		/**
 		*@brief Update function for the actionlist that runs every frame
@@ -34,6 +34,14 @@ namespace FieaGameEngine
 		*@return pointer to action
 		**/
 		class Action* CreateAction(const std::string & className, const std::string & instanceName);
+
+
+		static Vector<Signature> Signatures()
+		{
+			return Action::Signatures().Append({
+				Signature(sActions, FieaGameEngine::Datum::DatumType::TABLE)
+				});
+		}
 
 		static const std::string sActions;
 	protected:

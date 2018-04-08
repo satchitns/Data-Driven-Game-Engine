@@ -9,9 +9,9 @@ namespace FieaGameEngine
 		ActionDestroyAction();
 		~ActionDestroyAction() = default;
 		ActionDestroyAction(const ActionDestroyAction&) = delete;
-		ActionDestroyAction(ActionDestroyAction&&);
+		ActionDestroyAction(ActionDestroyAction&&) = default;
 		ActionDestroyAction& operator=(const ActionDestroyAction&) = delete;
-		ActionDestroyAction& operator=(ActionDestroyAction&&);
+		ActionDestroyAction& operator=(ActionDestroyAction&&) = default;
 
 		/**
 		*@brief Update function that removes action from parent and deletes it
@@ -26,6 +26,13 @@ namespace FieaGameEngine
 		std::string& InstanceName()
 		{
 			return mInstanceName;
+		}
+
+		static Vector<Signature> Signatures()
+		{
+			return Action::Signatures().Append({
+				Signature("InstanceName", FieaGameEngine::Datum::DatumType::STRING, 1, offsetof(ActionDestroyAction, mInstanceName))
+			});
 		}
 	private:
 		std::string mInstanceName;

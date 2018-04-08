@@ -10,24 +10,7 @@ namespace FieaGameEngine
 	Action::Action(uint64_t id)
 		: Attributed(id)
 	{
-		AddExternalAttribute("Name", mName);
-	}
-
-	Action::Action(Action&& other)
-		: Attributed(other), mName(std::move(other.mName))
-	{
-		UpdateExternalAttribute("Name", mName);
-	}
-
-	Action& Action::operator=(Action&& other)
-	{
-		if (this != &other)
-		{
-			Attributed::operator=(std::move(other));
-			mName = std::move(other.mName);
-			UpdateExternalAttribute("Name", mName);
-		}
-		return *this;
+		
 	}
 
 	const std::string & Action::Name() const
