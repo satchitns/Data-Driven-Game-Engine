@@ -48,6 +48,9 @@
     <ClInclude Include="DebugAction.h">
       <Filter>Support Classes</Filter>
     </ClInclude>
+    <ClInclude Include="TestSubscriber.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="stdafx.cpp">
@@ -106,6 +109,12 @@
     </ClCompile>
     <ClCompile Include="DebugAction.cpp">
       <Filter>Support Classes</Filter>
+    </ClCompile>
+    <ClCompile Include="EventTest.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="TestSubscriber.cpp">
+      <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
