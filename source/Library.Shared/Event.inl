@@ -8,7 +8,7 @@ namespace FieaGameEngine
 	RTTI_DEFINITIONS(Event<T>)
 
 	template<typename T>
-	Vector<EventSubscriber*> Event<T>::sSubscribers;
+	Vector<gsl::not_null<EventSubscriber*>> Event<T>::sSubscribers;
 
 	template<typename T>
 	Event<T>::Event(T& message)

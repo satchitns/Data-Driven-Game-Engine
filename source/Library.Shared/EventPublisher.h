@@ -2,6 +2,7 @@
 #include "RTTI.h"
 #include "Vector.h"
 #include <chrono>
+#include <gsl/gsl>
 
 namespace FieaGameEngine
 {
@@ -51,9 +52,9 @@ namespace FieaGameEngine
 		**/
 		void Deliver() const;
 	protected:
-		EventPublisher(Vector<EventSubscriber*>& subscribers);
+		EventPublisher(Vector<gsl::not_null<EventSubscriber*>>& subscribers);
 	private:
-		Vector<EventSubscriber*>* mSubscribers = nullptr;
+		Vector<gsl::not_null<EventSubscriber*>>* mSubscribers = nullptr;
 		std::chrono::milliseconds mDelay;
 		std::chrono::high_resolution_clock::time_point mTimeEnqueued;
 	};

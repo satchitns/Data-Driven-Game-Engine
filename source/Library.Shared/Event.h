@@ -1,6 +1,7 @@
 #pragma once
 #include "EventPublisher.h"
 #include "Vector.h"
+#include "gsl/gsl"
 
 namespace FieaGameEngine
 {
@@ -41,7 +42,7 @@ namespace FieaGameEngine
 		**/
 		T& Message();
 
-		static Vector<EventSubscriber*> sSubscribers;
+		static Vector<gsl::not_null<EventSubscriber*>> sSubscribers;
 	private:
 		T * mMessage = nullptr;
 	};

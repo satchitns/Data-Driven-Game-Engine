@@ -41,7 +41,7 @@ namespace FieaGameEngine
 		}
 	}
 
-	EventPublisher::EventPublisher(Vector<EventSubscriber*>& subscribers)
+	EventPublisher::EventPublisher(Vector<gsl::not_null<EventSubscriber*>>& subscribers)
 	{
 		mSubscribers = &subscribers;
 	}
