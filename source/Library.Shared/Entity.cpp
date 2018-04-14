@@ -78,4 +78,9 @@ namespace FieaGameEngine
 		action->SetEntity(*this);
 		return action;
 	}
+
+	Scope * Entity::Clone()
+	{
+		return new Entity(*this);
+	}
 }

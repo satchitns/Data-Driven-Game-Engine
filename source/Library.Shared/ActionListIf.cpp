@@ -56,4 +56,9 @@ namespace FieaGameEngine
 	{
 		Adopt(&action, "Else");
 	}
+
+	Scope * ActionListIf::Clone()
+	{
+		return new ActionListIf(*this);
+	}
 }

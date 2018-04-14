@@ -9,9 +9,9 @@ namespace UnitTestLibraryDesktop
 	public:
 		DebugAction();
 		~DebugAction() = default;
-		DebugAction(const DebugAction&) = delete;
+		DebugAction(const DebugAction&) = default;
 		DebugAction(DebugAction&&) = default;
-		DebugAction& operator=(const DebugAction&) = delete;
+		DebugAction& operator=(const DebugAction&) = default;
 		DebugAction& operator=(DebugAction&&) = default;
 
 		std::string& DebugAction::String();
@@ -23,6 +23,10 @@ namespace UnitTestLibraryDesktop
 				Signature("DebugString", FieaGameEngine::Datum::DatumType::STRING, 1, offsetof(DebugAction, mString))
 			});
 		}
+
+		bool UpdateCalled = false;
+	protected:
+		virtual Scope* Clone() override;
 	private:
 		std::string mString;
 	};

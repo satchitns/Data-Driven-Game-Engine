@@ -318,4 +318,9 @@ namespace FieaGameEngine
 		}
 		Result = tokenStack.top();
 	}
+
+	Scope * ActionExpression::Clone()
+	{
+		return new ActionExpression(*this);
+	}
 }

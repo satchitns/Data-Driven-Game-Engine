@@ -8,8 +8,8 @@ namespace UnitTestLibraryDesktop
 	public:
 		Monster();
 		virtual ~Monster() = default;
-		Monster(const Monster& other) = delete;
-		Monster& operator=(const Monster& other) = delete;
+		Monster(const Monster& other) = default;
+		Monster& operator=(const Monster& other) = default;
 		Monster(Monster&& other) = default;
 		Monster& operator=(Monster&& other) = default;
 

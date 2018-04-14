@@ -73,4 +73,9 @@ namespace FieaGameEngine
 		assert(mEntities != nullptr);
 		return *mEntities;
 	}
+
+	Scope * Sector::Clone()
+	{
+		return new Sector(*this);
+	}
 }

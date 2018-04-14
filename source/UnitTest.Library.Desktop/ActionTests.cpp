@@ -336,6 +336,26 @@ namespace UnitTestLibraryDesktop
 			delete world;
 		}
 
+		TEST_METHOD(ActionClones)
+		{
+			ActionList  *a = new ActionList();
+			ActionListIf *b = new ActionListIf();
+			ActionExpression* c = new ActionExpression();
+			DebugAction *d = new DebugAction();
+			ActionCreateAction *e = new ActionCreateAction();
+			ActionDestroyAction *f = new ActionDestroyAction();
+			Scope x;
+			x.Adopt(a, "Scopes");
+			x.Adopt(b, "Scopes");
+			x.Adopt(c, "Scopes");
+			x.Adopt(d, "Scopes");
+			x.Adopt(e, "Scopes");
+			x.Adopt(f, "Scopes");
+			int a11 = x.Find("Scopes")->Size();
+			a11;
+			Scope x2(x);
+		}
+
 	private:
 		static _CrtMemState sStartMemState;
 	};

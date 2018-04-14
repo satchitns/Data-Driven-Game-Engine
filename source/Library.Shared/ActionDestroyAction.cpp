@@ -35,4 +35,9 @@ namespace FieaGameEngine
 			currentScope = currentScope->GetParent();
 		}
 	}
+
+	Scope * ActionDestroyAction::Clone()
+	{
+		return new ActionDestroyAction(*this);
+	}
 }

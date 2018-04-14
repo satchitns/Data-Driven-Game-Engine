@@ -22,6 +22,9 @@
 #include "ActionExpression.h"
 #include "TypeManager.h"
 #include "AttributedFoo.h"
+#include "ActionEvent.h"
+#include "ReactionAttributed.h"
+#include "EventMessageAttributed.h"
 
 using namespace Microsoft::VisualStudio::CppUnitTestFramework;
 using namespace FieaGameEngine;
@@ -42,6 +45,10 @@ namespace UnitTestLibraryDesktop
 		Register(DebugAction);
 		Register(Monster);
 		Register(AttributedFoo);
+		Register(Reaction);
+		Register(ReactionAttributed);
+		Register(EventMessageAttributed);
+		Register(ActionEvent);
 	}
 
 	TEST_MODULE_CLEANUP(ClassCleanup)

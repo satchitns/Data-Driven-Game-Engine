@@ -152,7 +152,7 @@ namespace FieaGameEngine
 		**/
 		Vector<TableElement> AuxiliaryAttributes() const;
 	protected:
-
+		virtual Scope * Clone() override;
 	private:	
 		/**
 		*@brief Update external prescribed attributes for a class

@@ -8,9 +8,9 @@ namespace FieaGameEngine
 	public:
 		ActionDestroyAction();
 		~ActionDestroyAction() = default;
-		ActionDestroyAction(const ActionDestroyAction&) = delete;
+		ActionDestroyAction(const ActionDestroyAction&) = default;
 		ActionDestroyAction(ActionDestroyAction&&) = default;
-		ActionDestroyAction& operator=(const ActionDestroyAction&) = delete;
+		ActionDestroyAction& operator=(const ActionDestroyAction&) = default;
 		ActionDestroyAction& operator=(ActionDestroyAction&&) = default;
 
 		/**
@@ -34,6 +34,8 @@ namespace FieaGameEngine
 				Signature("InstanceName", FieaGameEngine::Datum::DatumType::STRING, 1, offsetof(ActionDestroyAction, mInstanceName))
 			});
 		}
+	protected:
+		virtual Scope* Clone() override;
 	private:
 		std::string mInstanceName;
 	};

@@ -279,25 +279,27 @@ namespace FieaGameEngine
 		{
 			Datum& datum = value->second;
 			string& name = value->first;
+			Datum& myDatum = Append(name);
 			if (datum.Type() == Datum::DatumType::TABLE)
 			{
+				myDatum.SetType(Datum::DatumType::TABLE);
 				for (uint32_t i = 0; i < datum.Size(); ++i)
 				{
 					Scope *otherScope = datum.Get<Scope*>(i);
 					if (otherScope != nullptr)
 					{
 
-						Adopt(new Scope(*otherScope), name);
+						Adopt(otherScope->Clone(), name);
 					}
 					else
 					{
-						Append(name).PushBack(otherScope);
+						myDatum.PushBack(otherScope);
 					}
 				}
 			}
 			else
 			{
-				Append(name) = datum;
+				myDatum = datum;
 			}
 		}
 	}
@@ -320,6 +322,11 @@ namespace FieaGameEngine
 	const Vector<Scope::TableElement>* Scope::GetVector() const
 	{
 		return &mVector;
+	}
+
+	Scope * Scope::Clone()
+	{
+		return new Scope(*this);
 	}
 
 	void Scope::Reparent(Scope&& other)

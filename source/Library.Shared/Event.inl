@@ -14,7 +14,7 @@ namespace FieaGameEngine
 	Event<T>::Event(T& message)
 		:EventPublisher(sSubscribers)
 	{
-		mMessage = &message;
+		mMessage = message;
 	}
 
 	template<typename T>
@@ -36,9 +36,8 @@ namespace FieaGameEngine
 	}
 
 	template<typename T>
-	T&  Event<T>::Message()
+	const T&  Event<T>::Message() const
 	{
-		assert(mMessage != nullptr);
-		return *mMessage;
+		return mMessage;
 	}
 }

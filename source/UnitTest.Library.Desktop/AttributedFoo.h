@@ -21,7 +21,6 @@ namespace UnitTestLibraryDesktop
 		glm::mat4 mTransform, matArray[3];
 		std::string mName, strArray[3];
 		RTTI* mFoo;
-
 		static FieaGameEngine::Vector<Signature> Signatures()
 		{
 			return FieaGameEngine::Vector<Signature>
@@ -39,5 +38,7 @@ namespace UnitTestLibraryDesktop
 					Signature("Foo", FieaGameEngine::Datum::DatumType::POINTER, 1, offsetof(AttributedFoo, mFoo))
 			};
 		}
+	protected:
+		virtual Scope* Clone() override;
 	};
 }

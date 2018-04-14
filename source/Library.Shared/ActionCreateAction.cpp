@@ -24,4 +24,9 @@ namespace FieaGameEngine
 		action->SetName(mInstanceName);
 		parent->Adopt(action, Entity::sActions);
 	}
+
+	Scope* ActionCreateAction::Clone()
+	{
+		return new ActionCreateAction(*this);
+	}
 }

@@ -16,9 +16,9 @@ namespace FieaGameEngine
 	public:
 		Entity();
 		virtual ~Entity() = default;
-		Entity(const Entity& other) = delete;
+		Entity(const Entity& other) = default;
 		Entity(Entity&& other) = default;
-		Entity& operator=(const Entity&) = delete;
+		Entity& operator=(const Entity&) = default;
 		Entity& operator=(Entity&& other) = default;
 
 		/**
@@ -77,6 +77,7 @@ namespace FieaGameEngine
 		static const std::string sActions;
 	protected:
 		Entity(uint64_t);
+		virtual Scope* Clone() override;
 	private:
 		std::string mName;
 		Datum* mActions = nullptr;

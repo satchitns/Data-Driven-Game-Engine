@@ -94,46 +94,8 @@ namespace UnitTestLibraryDesktop
 		return *this;
 	}
 
-	/*void AttributedFoo::InitializeScope()
+	FieaGameEngine::Scope* AttributedFoo::Clone()
 	{
-		AddExternalAttribute("Count", mCount);
-		AddExternalAttribute("Health", mHealth);
-		AddExternalAttribute("Position", mPosition);
-		AddExternalAttribute("Transform", mTransform);
-		AddExternalAttribute("Name", mName);
-		AddExternalAttribute("Foo", mFoo);
-
-		AddExternalAttribute("IntArray", intArray[0], 3);
-		AddExternalAttribute("FloatArray", floatArray[0], 3);
-		AddExternalAttribute("MatArray", matArray[0], 3);
-		AddExternalAttribute("VecArray", vecArray[0], 3);
-		AddExternalAttribute("StrArray", strArray[0], 3);
-
-		AddInternalAttribute("Count1", 0, 1);
-		AddInternalAttribute("Health1", 100.0f, 1);
-		AddInternalAttribute("Position1", vec4(0), 1);
-		AddInternalAttribute("Transform1", mat4(1), 1);
-		AddInternalAttribute("Aliases1", "hi", 3);
-		RTTI * foo = new Foo(1, 1);
-		AddInternalAttribute("Foo1", foo, 1);
-		delete foo;
-
-		AddNestedScope("NestedScope");
+		return new AttributedFoo(*this);
 	}
-
-	void AttributedFoo::UpdateScope()
-	{
-		UpdateExternalAttribute("Count", mCount);
-		UpdateExternalAttribute("Health", mHealth);
-		UpdateExternalAttribute("Position", mPosition);
-		UpdateExternalAttribute("Transform", mTransform);
-		UpdateExternalAttribute("Name", mName);
-		UpdateExternalAttribute("Foo", mFoo);
-
-		UpdateExternalAttribute("IntArray", intArray[0], 3);
-		UpdateExternalAttribute("FloatArray", floatArray[0], 3);
-		UpdateExternalAttribute("MatArray", matArray[0], 3);
-		UpdateExternalAttribute("VecArray", vecArray[0], 3);
-		UpdateExternalAttribute("StrArray", strArray[0], 3);
-	}*/
 }

@@ -9,9 +9,9 @@ namespace FieaGameEngine
 	public:
 		ActionListIf();
 		~ActionListIf() = default;
-		ActionListIf(const ActionListIf&) = delete;
+		ActionListIf(const ActionListIf&) = default;
 		ActionListIf(ActionListIf&&) = default;
-		ActionListIf& operator=(const ActionListIf&) = delete;
+		ActionListIf& operator=(const ActionListIf&) = default;
 		ActionListIf& operator=(ActionListIf&&) = default;
 
 		/**
@@ -62,6 +62,8 @@ namespace FieaGameEngine
 				Signature("Else", FieaGameEngine::Datum::DatumType::TABLE)
 			});
 		}
+	protected:
+		virtual Scope* Clone() override;
 	private:
 		int mCondition = 0;
 		Datum* mIfDatum = nullptr;

@@ -59,9 +59,9 @@ namespace FieaGameEngine
 
 		ActionExpression();
 		~ActionExpression() = default;
-		ActionExpression(const ActionExpression&) = delete;
+		ActionExpression(const ActionExpression&) = default;
 		ActionExpression(ActionExpression&&) = default;
-		ActionExpression& operator=(const ActionExpression&) = delete;
+		ActionExpression& operator=(const ActionExpression&) = default;
 		ActionExpression& operator=(ActionExpression&&) = default;
 
 		/**
@@ -93,6 +93,8 @@ namespace FieaGameEngine
 				Signature("String", FieaGameEngine::Datum::DatumType::STRING, 1, offsetof(ActionExpression, mString))
 			});
 		}
+	protected:
+		virtual Scope* Clone() override;
 	private:
 		Vector<Token> mTokenVector;
 		std::string mString;

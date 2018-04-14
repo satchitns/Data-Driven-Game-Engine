@@ -9,9 +9,9 @@ namespace FieaGameEngine
 	public:
 		ActionList();
 		virtual ~ActionList() = default;
-		ActionList(const ActionList&) = delete;
+		ActionList(const ActionList&) = default;
 		ActionList(ActionList&&) = default;
-		ActionList& operator=(const ActionList&) = delete;
+		ActionList& operator=(const ActionList&) = default;
 		ActionList& operator=(ActionList&&) = default;
 
 		/**
@@ -46,6 +46,7 @@ namespace FieaGameEngine
 		static const std::string sActions;
 	protected:
 		ActionList(uint64_t id);
+		virtual Scope* Clone() override;
 	private:
 		Datum * mActions = nullptr;
 	};

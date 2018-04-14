@@ -12,7 +12,6 @@ namespace FieaGameEngine
 	ActionList::ActionList()
 		:ActionList(TypeIdInstance())
 	{
-	
 	}
 
 	ActionList::ActionList(uint64_t id)
@@ -49,5 +48,10 @@ namespace FieaGameEngine
 		action->SetName(instanceName);
 		action->SetParent(*this);
 		return action;
+	}
+
+	Scope * ActionList::Clone()
+	{
+		return new ActionList(*this);
 	}
 }

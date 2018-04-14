@@ -133,4 +133,9 @@ namespace FieaGameEngine
 			}
 		}
 	}
+
+	Scope * Attributed::Clone()
+	{
+		return new Attributed(*this);
+	}
 }

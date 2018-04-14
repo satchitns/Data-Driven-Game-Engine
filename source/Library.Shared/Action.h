@@ -13,9 +13,9 @@ namespace FieaGameEngine
 	public:
 		Action() = delete;
 		virtual ~Action() = default;
-		Action(const Action&) = delete;
+		Action(const Action&) = default;
 		Action(Action&&) = default;
-		Action& operator=(const Action&) = delete;
+		Action& operator=(const Action&) = default;
 		Action& operator=(Action&&) = default;
 
 		/**
@@ -57,6 +57,7 @@ namespace FieaGameEngine
 		}
 	protected:
 		Action(uint64_t);
+		virtual Scope* Clone() override = 0;
 	private:
 		std::string mName;
 	};

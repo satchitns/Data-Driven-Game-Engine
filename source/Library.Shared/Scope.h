@@ -190,6 +190,7 @@ namespace FieaGameEngine
 		virtual std::string ToString() const override;
 	protected:
 		const Vector<TableElement>* GetVector() const;
+		virtual Scope* Clone();
 	private:
 		void CopyScope(const Scope& other);
 		void Reparent(Scope&& other);

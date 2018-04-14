@@ -6,6 +6,7 @@
 #include "World.h"
 #include "ActionList.h"
 #include "ActionListIf.h"
+#include "Reaction.h"
 
 namespace FieaGameEngine
 {
@@ -82,6 +83,12 @@ namespace FieaGameEngine
 									childScope = entity->CreateAction(element["className"].asString(), name);
 								}
 							}
+						}
+						else if (!className.compare("reaction"))
+						{
+							assert(scope->Is(World::TypeIdClass()));
+							World *world = static_cast<World*>(scope);
+							childScope = world->CreateReaction(element["className"].asString(), name);
 						}
 					}
 					tableData->SetScope(*childScope);

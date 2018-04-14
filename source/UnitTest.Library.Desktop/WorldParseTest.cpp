@@ -149,6 +149,20 @@ namespace UnitTestLibraryDesktop
 			Assert::IsTrue(s5.Entities().Get<Scope*>() == s);
 		}
 
+		TEST_METHOD(ActorClones)
+		{
+			GameClock clock;
+			GameTime time;
+			World* world = new World(time, clock);
+			Sector* sector = new Sector();
+			Entity* entity = new Entity();
+			Scope x;
+			x.Adopt(world, "Scopes");
+			x.Adopt(entity, "Scopes");
+			x.Adopt(sector, "Scopes");
+			Scope x2(x);
+		}
+
 		TEST_METHOD(WorldMove)
 		{
 			GameTime t;

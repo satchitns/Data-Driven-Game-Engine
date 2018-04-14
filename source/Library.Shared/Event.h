@@ -40,11 +40,11 @@ namespace FieaGameEngine
 		*@brief Method to get the payload of the event
 		*@return reference to a templated type object
 		**/
-		T& Message();
+		const T& Message() const;
 
 		static Vector<gsl::not_null<EventSubscriber*>> sSubscribers;
 	private:
-		T * mMessage = nullptr;
+		T mMessage;
 	};
 }
 

@@ -49,7 +49,7 @@
       <Filter>Support Classes</Filter>
     </ClInclude>
     <ClInclude Include="TestSubscriber.h">
-      <Filter>Header Files</Filter>
+      <Filter>Support Classes</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -114,6 +114,9 @@
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="TestSubscriber.cpp">
+      <Filter>Support Classes</Filter>
+    </ClCompile>
+    <ClCompile Include="ReactionTest.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
@@ -129,6 +132,9 @@
       <Filter>Support Classes</Filter>
     </None>
     <None Include="Content\Exprn.json">
+      <Filter>Support Classes</Filter>
+    </None>
+    <None Include="Content\Reaction.json">
       <Filter>Support Classes</Filter>
     </None>
   </ItemGroup>

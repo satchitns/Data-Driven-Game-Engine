@@ -269,6 +269,7 @@ xcopy /Y /E "$(ProjectDir)Content" "$(OutDir)Content"</Command>
     <ClCompile Include="FooSharedData.cpp" />
     <ClCompile Include="MapTest.cpp" />
     <ClCompile Include="Monster.cpp" />
+    <ClCompile Include="ReactionTest.cpp" />
     <ClCompile Include="ScopeTest.cpp" />
     <ClCompile Include="stdafx.cpp">
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Create</PrecompiledHeader>
@@ -293,6 +294,7 @@ xcopy /Y /E "$(ProjectDir)Content" "$(OutDir)Content"</Command>
     <None Include="Content\ActionLevel.json" />
     <None Include="Content\Exprn.json" />
     <None Include="Content\level.json" />
+    <None Include="Content\Reaction.json" />
     <None Include="Content\scope.json" />
     <None Include="packages.config" />
   </ItemGroup>

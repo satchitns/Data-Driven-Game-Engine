@@ -16,8 +16,8 @@ namespace FieaGameEngine
 	public:
 		Sector();
 		~Sector() = default;
-		Sector(const Sector& other) = delete;
-		Sector& operator=(const Sector& other) = delete;
+		Sector(const Sector& other) = default;
+		Sector& operator=(const Sector& other) = default;
 		Sector(Sector&& other) = default;
 		Sector& operator=(Sector&& other) = default;
 
@@ -75,6 +75,8 @@ namespace FieaGameEngine
 		}
 
 		static const std::string sEntities;
+	protected:
+		virtual Scope* Clone() override;
 	private:
 		std::string mName;
 		Datum* mEntities = nullptr;
