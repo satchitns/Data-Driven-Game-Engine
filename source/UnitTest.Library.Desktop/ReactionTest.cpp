@@ -50,7 +50,7 @@ namespace UnitTestLibraryDesktop
 		ConcreteFactory(ActionEvent, Action)
 		ConcreteFactory(ReactionAttributed, Reaction)
 
-		TEST_CLASS(RectionTests)
+		TEST_CLASS(ReactionTests)
 	{
 	public:
 
@@ -137,6 +137,6 @@ namespace UnitTestLibraryDesktop
 		}
 
 	private:
-		_CrtMemState RectionTests::sStartMemState;
+		_CrtMemState ReactionTests::sStartMemState;
 	};
 }

@@ -3,6 +3,9 @@
 #include "EventPublisher.h"
 #include "Monster.h"
 #include"Event.h"
+#include "Foo.h"
+#include <random>
+#include <Event.h>
 
 namespace UnitTestLibraryDesktop
 {
@@ -12,6 +15,17 @@ namespace UnitTestLibraryDesktop
 		{
 			mMonsterCount++;
 		}
+		else if (event.Is(FieaGameEngine::Event<Foo>::TypeIdClass()))
+		{
+				FieaGameEngine::Event<Foo>::Unsubscribe(*this);
+				auto ptr = std::make_shared<FieaGameEngine::Event<int>>(mCount);
+				queue->Enqueue(ptr, time, std::chrono::milliseconds(0));
+		}
+		else
+		{
+			mIntCount++;
+		}
+
 		event;
 		mCount++;
 	}

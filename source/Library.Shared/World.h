@@ -19,8 +19,8 @@ namespace FieaGameEngine
 	public:
 		World(GameTime& time, GameClock& clock);
 		~World() = default;
-		World(const World& other) = default;
-		World& operator=(const World& other) = default;
+		World(const World& other) = delete;
+		World& operator=(const World& other) = delete;
 		World(World&& other) = default;
 		World& operator=(World&& other) = default;
 
@@ -97,8 +97,6 @@ namespace FieaGameEngine
 
 		static const std::string sSectors;
 		static const std::string sReactions;
-	protected:
-		virtual Scope* Clone() override;
 	private:
 		Vector<Scope*> mDeleteQueue;
 		std::string mName;

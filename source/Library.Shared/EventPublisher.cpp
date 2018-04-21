@@ -1,6 +1,8 @@
 #include "pch.h"
 #include "EventSubscriber.h"
 #include "EventPublisher.h"
+#include <future>
+#include <vector>
 
 namespace FieaGameEngine
 {
@@ -35,14 +37,30 @@ namespace FieaGameEngine
 	void EventPublisher::Deliver() const
 	{
 		assert(mSubscribers != nullptr);
-		for (auto& subscriber : *mSubscribers)
+		Vector<gsl::not_null<EventSubscriber*>> copyVector;
+		std::vector<std::future<void>> futures;
 		{
-			subscriber->Notify(*this);
+			assert(mMutex != nullptr);
+			std::lock_guard<std::mutex> lock(*mMutex); //the subscriber list is locked while notify is called
+			copyVector = *mSubscribers;
+		}
+		for (auto it = copyVector.begin(); it != copyVector.end(); ++it)
+		{
+			futures.emplace_back(std::async(std::launch::async, [it, this]
+			{
+				(*it)->Notify(*this);
+			}));
+		}
+		//unlock the subscriber list (by leaving the scope) while waiting for the threads to complete
+		for (auto & future : futures)
+		{
+			future.get();
 		}
 	}
 
-	EventPublisher::EventPublisher(Vector<gsl::not_null<EventSubscriber*>>& subscribers)
+	EventPublisher::EventPublisher(Vector<gsl::not_null<EventSubscriber*>>& subscribers, std::mutex& mutex)
+		: mSubscribers(&subscribers), mMutex(&mutex)
 	{
-		mSubscribers = &subscribers;
+
 	}
 }

@@ -153,11 +153,9 @@ namespace UnitTestLibraryDesktop
 		{
 			GameClock clock;
 			GameTime time;
-			World* world = new World(time, clock);
 			Sector* sector = new Sector();
 			Entity* entity = new Entity();
 			Scope x;
-			x.Adopt(world, "Scopes");
 			x.Adopt(entity, "Scopes");
 			x.Adopt(sector, "Scopes");
 			Scope x2(x);
@@ -171,12 +169,6 @@ namespace UnitTestLibraryDesktop
 			s1.SetName("World1");
 			s1.CreateSector("FirstSector");
 			World s2(t, c);
-			Scope * s = s1.Sectors().Get<Scope*>();
-			World s4(t, c);
-			s4 = std::move(s1);
-			World s5(std::move(s4));
-			Assert::IsTrue(s5.Name() == "World1"s);
-			Assert::IsTrue(s5.Sectors().Get<Scope*>() == s);
 		}
 
 	private:

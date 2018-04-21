@@ -6,7 +6,7 @@
 namespace FieaGameEngine
 {
 	/**
-	*@brief Event class that sends out events of specific types (passed in as template argument) to subscribers.
+	*@brief Event class that sends out events of specific types (passed in as template argument) to subscribers in multiple threads.
 	**/
 	template<typename T>
 	class Event : public EventPublisher
@@ -43,6 +43,8 @@ namespace FieaGameEngine
 		const T& Message() const;
 
 		static Vector<gsl::not_null<EventSubscriber*>> sSubscribers;
+
+		static std::mutex sMutex;
 	private:
 		T mMessage;
 	};

@@ -1,24 +1,26 @@
 #pragma once
-#include<deque>
+#include <deque>
 #include <chrono>
-#include<memory>
+#include <memory>
+#include <mutex>
 #include "EventPublisher.h"
+#include <vector>
 
 namespace FieaGameEngine
 {
 	class GameTime;
 
 	/**
-	*@brief Event queue class that queues up events and calls Deliver on them when they expire.
+	*@brief Event queue class that queues up events and calls Deliver on them in multiple threads when they expire.
 	**/
 	class EventQueue final
 	{
 	public:
 		EventQueue() = default;
 		~EventQueue() = default;
-		EventQueue(const EventQueue&) = default;
+		EventQueue(const EventQueue&) = delete;
 		EventQueue(EventQueue&&) = default;
-		EventQueue& operator=(const EventQueue&) = default;
+		EventQueue& operator=(const EventQueue&) = delete;
 		EventQueue& operator=(EventQueue&&) = default;
 
 		/**
@@ -59,7 +61,8 @@ namespace FieaGameEngine
 		**/
 		size_t Size() const;
 	private:
-		std::deque<std::shared_ptr<EventPublisher>> mQueue;
+		std::vector<std::shared_ptr<EventPublisher>> mQueue;
+		mutable std::mutex mMutex;
 	};
 }
 

@@ -95,9 +95,4 @@ namespace FieaGameEngine
 		sector->SetWorld(*this);
 		return sector;
 	}
-
-	Scope * World::Clone()
-	{
-		return new World(*this);
-	}
 }

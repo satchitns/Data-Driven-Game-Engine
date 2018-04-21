@@ -3,6 +3,7 @@
 #include "Vector.h"
 #include <chrono>
 #include <gsl/gsl>
+#include <mutex>
 
 namespace FieaGameEngine
 {
@@ -52,9 +53,10 @@ namespace FieaGameEngine
 		**/
 		void Deliver() const;
 	protected:
-		EventPublisher(Vector<gsl::not_null<EventSubscriber*>>& subscribers);
+		EventPublisher(Vector<gsl::not_null<EventSubscriber*>>& subscribers, std::mutex& mutex);
 	private:
 		Vector<gsl::not_null<EventSubscriber*>>* mSubscribers = nullptr;
+		std::mutex* mMutex = nullptr;
 		std::chrono::milliseconds mDelay;
 		std::chrono::high_resolution_clock::time_point mTimeEnqueued;
 	};

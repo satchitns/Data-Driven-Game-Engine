@@ -38,6 +38,9 @@ namespace UnitTestLibraryDesktop
 
 		TEST_METHOD_INITIALIZE(Initialize)
 		{
+			Event<int>::sSubscribers.Reserve(10000);
+			Event<Foo>::sSubscribers.Reserve(10000);
+			Event<Monster>::sSubscribers.Reserve(10000);
 #ifdef _DEBUG
 			_CrtSetDbgFlag(_CRTDBG_ALLOC_MEM_DF);
 			_CrtMemCheckpoint(&sStartMemState);
@@ -153,6 +156,63 @@ namespace UnitTestLibraryDesktop
 			Assert::IsTrue(xPtr->Delay() == std::chrono::milliseconds::zero());
 			Assert::IsTrue(time.CurrentTime() == xPtr->TimeEnqueued());
 			queue.Clear();
+			Event<int>::UnsubscribeAll();
+		}
+
+		TEST_METHOD(EventQueueMultiStressTest)
+		{
+			EventQueue queue;
+			Monster m, y;
+			int x;
+			Foo a;
+			Vector<std::shared_ptr<Event<Monster>>> eventPtrs;
+			Vector<std::shared_ptr<Event<int>>> intEventPtrs;
+			Vector<std::shared_ptr<Event<Foo>>> fooEventPtrs;
+			for (int i = 0; i < 200; ++i)
+			{
+				eventPtrs.PushBack(std::make_shared<Event<Monster>>(m));
+				intEventPtrs.PushBack(std::make_shared<Event<int>>(x));
+			}
+			for (int i = 0; i < 5; i++)
+			{
+				fooEventPtrs.PushBack(std::make_shared<Event<Foo>>(a));
+			}
+			auto yPtr = std::make_shared<Event<Monster>>(y);
+			Vector<TestSubscriber> intEaters;
+			intEaters.Resize(100);
+			GameTime time;
+			for (auto& intEater : intEaters)
+			{
+				intEater.queue = &queue;
+				Event<Monster>::Subscribe(intEater);
+				Event<int>::Subscribe(intEater);
+				Event<Foo>::Subscribe(intEater);
+			}
+
+			GameClock clock;
+			clock.UpdateGameTime(time);
+			Assert::IsTrue(queue.IsEmpty());
+			for (auto& ptr : eventPtrs)
+			{
+				queue.Enqueue(ptr, time, std::chrono::milliseconds(0));
+			}
+			for (auto& ptr : intEventPtrs)
+			{
+				queue.Enqueue(ptr, time, std::chrono::milliseconds(0));
+			}
+			for (auto& ptr : fooEventPtrs)
+			{
+				queue.Enqueue(ptr, time, std::chrono::milliseconds(0));
+			}
+			queue.Enqueue(yPtr, time);
+			queue.Update(time);
+			auto newTime = time.CurrentTime();
+			newTime += std::chrono::milliseconds(20);
+			time.SetCurrentTime(newTime);
+			queue.Update(time);
+			Assert::AreEqual(intEaters[0].mMonsterCount, 201);
+			Assert::AreNotEqual(intEaters[0].mIntCount, 201);
+			Event<Monster>::UnsubscribeAll();
 		}
 	private:
 		static _CrtMemState sStartMemState;
